@@ -37,19 +37,38 @@ header {
   margin-bottom: 1rem;
 
 }
+header nav ul {
+  display: flex;
+  gap: 1rem;
+}
 
 nav ul li {
   list-style-type: none;
-  a {
-    color: black;
-    border: 2px solid gray;
-    text-decoration: none;
-    padding: 0.7rem;
-  }
-  a:hover {
-    color: white;
-    background-color: gray;
-  }
+}
+
+.nav-btn-with-background {
+  color: black;
+  border: 2px solid gray;
+  text-decoration: none;
+  padding: 0.7rem;
+}
+
+.nav-btn-with-background:hover {
+  color: white;
+  background-color: gray;
+}
+
+.nav-btn-plain-text {
+  color: black;
+  font-size: large;
+  text-decoration: none;
+  padding: 0.7rem;
+}
+
+.nav-btn-plain-text:hover {
+  color: gray;
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
 }
 
 footer {
