@@ -18,5 +18,8 @@ $(document).ready(function() {
   
     // Change slide every 5 seconds
     setInterval(nextSlide, 5000);
-  });
+
+    // create dummy data on document ready
+    createDummyData();
+});
   
