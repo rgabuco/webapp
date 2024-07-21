@@ -1,5 +1,27 @@
 $(document).ready(function() {
-    const userAccount = []; // Array that will hold the user data
+    const usersKey = 'users'; // Key for storing users in local storage
+
+    // Retrieve user data from local storage
+    function retrieveUserData() {
+        let userData = [];
+        for (let i = 0; i < localStorage.length; i++) {
+            let key = localStorage.key(i);
+            if (key.startsWith('user_')) {
+                let user = localStorage.getItem(key).split(';');
+                userData.push({
+                    email: key.substring(5),
+                    fullName: user[0],
+                    phoneNumber: user[1]
+                });
+            }
+        }
+        return userData;
+    }
+
+    // Save user data to the local storage
+    function saveUserData(user) {
+        localStorage.setItem('user_' + user.email.toLowerCase(), '${user.fullName};${user.phoneNumber}');
+    }
 
     $('#signup-btn').click(function(event) {
         event.preventDefault();
@@ -7,6 +29,9 @@ $(document).ready(function() {
         let fullName = $('#full-name').val();
         let phoneNumber = $('phone-number').val();
         let email = $('#email').val();
+
+        // Retrieve user data from local storage
+        const users = retrieveUserData();
 
         // Basic email validation
         function isValidEmail(email) {
@@ -19,8 +44,8 @@ $(document).ready(function() {
 
         // Check if email is already signed up
         function isEmailAlreadySignedUp(email) {
-            for (let i = 0; i < userAccount.length; i++) {
-                if(userAccount[i].email === email) {
+            for (let i = 0; i < userData.length; i++) {
+                if(userData[i].email === email) {
                     return true;
                 }
             }
@@ -53,11 +78,11 @@ $(document).ready(function() {
             email: email
         };
 
-        // Add the user object to the array
-        users.push(user);
+        // Add the user object to the local storage
+        saveUserData(user);
 
         // Optionally, log the array to see the updated list of users
-        console.log(userAccount);
+        console.log(users);
 
         // Reset the form (this is optional)
         // $('form')[0].reset();
