@@ -65,11 +65,11 @@ function createDummyData() {
   let studioData = retrieveStudioData();
   if (!studioData.length) {
     //name, address, area, type, capacity, hasParking, hasPublicTransport, availability, rentalTerm, pricePerTerm
-    studioData.push(new studio("John's Art Studio", "123 Main St", "Downtown", "Art Studio", 10, true, true, "Available", "Monthly", 3000));
-    studioData.push(new studio("Jane's Recording Studio", "456 Main St", "Downtown", "Recording Studio", 5, true, false, "Available", "Day", 200));
-    studioData.push(new studio("JS Dance Studio", "789 Main St", "Edgemont", "Dance Studio", 20, true, true, "Rented", "Hour", 50));
-    studioData.push(new studio("Smith Music Studio", "321 Main St", "Glendale", "Music Studio", 15, false, true, "Available", "Day", 300));
-    studioData.push(new studio("JJ Photography Studio", "654 Main St", "Downtown", "Photography Studio", 8, true, true, "Rented", "Hour", 40));
+    studioData.push(new studio("John's Art Studio", "123 Main St", "Downtown", "Art Studio", 10, "yes", "yes", "Available", "Month", 3000));
+    studioData.push(new studio("Jane's Recording Studio", "456 Main St", "Downtown", "Recording Studio", 5, "yes", "no", "Available", "Day", 200));
+    studioData.push(new studio("JS Dance Studio", "789 Main St", "Edgemont", "Dance Studio", 20, "yes", "yes", "Rented", "Hour", 50));
+    studioData.push(new studio("Smith Music Studio", "321 Main St", "Glendale", "Music Studio", 15, "no", "yes", "Available", "Day", 300));
+    studioData.push(new studio("JJ Photography Studio", "654 Main St", "Downtown", "Photography Studio", 8, "yes", "yes", "Rented", "Hour", 40));
     saveStudioData(studioData);
   }
 }
