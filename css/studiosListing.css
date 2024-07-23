@@ -1,0 +1,47 @@
+main h1 {
+  text-align: center; /* Centers the heading */
+  margin: 3rem 0 10rem 0; /* Adds space above and below the heading */
+}
+
+/* Container holding studioBox elements */
+#studios-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Adjusts the distribution of boxes within the container */
+  gap: 3rem; /* Adds space between the boxes */
+}
+
+/* Styling for each studioBox */
+.studio-box {
+  border: 1px solid #000; /* Solid black border */
+  padding: 10px; /* Space inside the box around the content */
+  width: calc(30% - 20px); /* Adjusted for three boxes per row, accounting for margin */
+  cursor: pointer; /* Changes the mouse cursor to indicate the box is clickable */
+  background-color: #f9f9f9; /* Light background color for the box */
+  transition: transform 0.2s; /* Smooth transformation when hovered */
+  border-radius: 0.5rem; /* Adds rounded corners to the box */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adds border shadow */
+}
+
+.studio-box:hover {
+  transform: scale(1.05); /* Slightly enlarges the box on hover */
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+  .studio-box {
+    width: calc(35% - 20px); /* Two boxes per row on tablets */
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #studios-container {
+    gap: 1rem; /* Reduces space between boxes for smaller screens */
+  }
+  .studio-box {
+    width: calc(100% - 20px); /* One box per row on mobile phones*/
+    margin: 5px; 
+    padding: 5px; 
+  }
+}
