@@ -1,56 +1,45 @@
 $(document).ready(function() {
-    const usersKey = 'users'; // Key for storing users in local storage
-
+   
     // Retrieve user data from local storage
     function retrieveUserData() {
-        let userData = [];
-        for (let i = 0; i < localStorage.length; i++) {
-            let key = localStorage.key(i);
-            if (key.startsWith('user_')) {
-                let user = localStorage.getItem(key).split(';');
-                userData.push({
-                    email: key.substring(5),
-                    fullName: user[0],
-                    phoneNumber: user[1]
-                });
-            }
+        let storedData = localStorage.getItem('userData');
+        if (storedData) {
+            return JSON.parse(storedData);
         }
-        return userData;
+        return [];
     }
 
     // Save user data to the local storage
-    function saveUserData(user) {
-        localStorage.setItem('user_' + user.email.toLowerCase(), '${user.fullName};${user.phoneNumber}');
+    function saveUserData(userData) {
+        localStorage.setItem('userData', JSON.stringify(userData));
     }
 
     $('#signup-btn').click(function(event) {
         event.preventDefault();
         
-        let fullName = $('#full-name').val();
-        let phoneNumber = $('phone-number').val();
+        let name = $('#name').val();
         let email = $('#email').val();
-
+        let contactNo = $('#contact-no').val();
+        
         // Retrieve user data from local storage
-        const users = retrieveUserData();
+        let users = retrieveUserData();
 
         // Basic email validation
         function isValidEmail(email) {
-            return email.indexOf('@') > 0 && email.indexOf('.') > email.indexOf('@') + 1 && email.indexOf('.') < email.length - 1
+            const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+            return regex.test(email);
         }
         // Basic phone number validation
-        function isValidPhoneNumber(phoneNumber) {
-            return phoneNumber.length === 10 && /^\d+$/.test(phoneNumber);
+        function isValidPhoneNumber(contactNo) {
+            return contactNo.length === 10 && /^\d+$/.test(contactNo);
         }
-
         // Check if email is already signed up
         function isEmailAlreadySignedUp(email) {
-            for (let i = 0; i < userData.length; i++) {
-                if(userData[i].email === email) {
-                    return true;
-                }
-            }
-            return false;
+            return users.some(user => user.email === email);
         }
+
+        // Clear previous error message
+        $('#error-message').text('');
 
         // Error message to validate email
         if (!isValidEmail(email)) {
@@ -59,35 +48,29 @@ $(document).ready(function() {
             return;
         } 
         // Error message to validate phone number
-        if (!isValidPhoneNumber(phoneNumber)) {
+        if (!isValidPhoneNumber(contactNo)) {
             $('#error-message').css('color','red');
             $('#error-message').text('Invalid input. Please enter a valid phone number!');
             return;
         }
         // Error message to check if email is already signed up
-        if (!isEmailAlreadySignedUp(email)) {
+        if (isEmailAlreadySignedUp(email)) {
             $('#error-message').css('color','red');
             $('#error-message').text('Email is already signed up. Please login!');
             return;
         }
 
         // User object
-        const user = {
-            fullName: fullName,
-            phoneNumber: phoneNumber,
-            email: email
+        const userAccount = {
+            name: name,
+            email: email,
+            contactNo: contactNo
         };
 
         // Add the user object to the local storage
-        saveUserData(user);
+        users.push(userAccount);
+        saveUserData(users);
 
-        // Optionally, log the array to see the updated list of users
-        console.log(users);
-
-        // Reset the form (this is optional)
-        // $('form')[0].reset();
-
-        // Provide some feedback to the user (this is optional)
-        // alert('Account created successfully!')
+        window.location.href = 'studiosListing.html';
     });
 });
