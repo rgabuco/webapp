@@ -104,7 +104,7 @@ $(document).ready(function() {
 
   populateSelectOptions();
 
-  $('#filterButton').click(() => {
+  function applyFilters() {
     const selectedName = nameInput.value.toLowerCase();
     const selectedPrice = priceSelect.value;
     const selectedLocation = locationSelect.value.toLowerCase();
@@ -146,7 +146,18 @@ $(document).ready(function() {
     filteredStudios.forEach(studio => {
       $('#studios-container').append(createStudioBox(studio));
     });
+  }
+
+  // Trigger filter on Enter key press in the search input
+  nameInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent default form submission if in a form
+      applyFilters(); // Call the filter function
+    }
   });
+
+  // Trigger filter when clicking the filter button
+  $('#filterButton').click(applyFilters);
 
   displayAllListings();
 });
