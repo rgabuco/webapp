@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>View Listing</title>
-  <link rel="stylesheet" href="../css/common.css">
-  <link rel="stylesheet" href="../css/viewListing.css">
+  <title>View Studio Listing</title>
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/viewListing.css">
   <script src="../lib/jquery-3.7.1.js" defer></script>
   <script src="../js/common.js" defer></script>
-  <script src="../js/viewListing.js" defer></script> 
+  <script src="../js/viewlisting.js" defer></script>
 </head>
 <body>
+  <!-- Header Section -->
   <header>
     <div>
       <h1 class="logo">Creative Studio Rentals</h1>
@@ -24,35 +25,25 @@
       </nav>
     </div>
   </header>
+
+  <!-- Main Content -->
   <main>
-    <section class="filters">
-      <div class="filter-group">
-        <label for="search">Search:</label>
-        <input type="text" id="search" placeholder="Search properties">
-      </div>
-      <div class="filter-group">
-        <label for="price">Price:</label>
-        <select id="price">
-          <option value="any">Any</option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label for="location">Location:</label>
-        <select id="location">
-          <option value="any">Any</option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label for="availability">Availability:</label>
-        <select id="availability">
-          <option value="any">Any</option>
-        </select>
-      </div>
-      <button class="body-btn" id="filterButton">Filter</button>
-    </section>
-    <section class="property-list">
-      <!-- Property items will be dynamically added here -->
-    </section>
+    <div id="studio-details"></div>
+    <div id="contact-details"></div>
+
+    <h2>Contact the Owner</h2>
+    <form id="contact-form">
+      <label for="contact-name">Name:</label>
+      <input type="text" id="contact-name" name="contact-name" required>
+      <br>
+      <label for="contact-message">Message (100 characters max):</label>
+      <textarea id="contact-message" name="contact-message" maxlength="100" required></textarea>
+      <br>
+      <label for="contact-number">Contact Number:</label>
+      <input type="tel" id="contact-number" name="contact-number" required>
+      <br>
+      <button type="submit">Send Message</button>
+    </form>
   </main>
 </body>
 </html>

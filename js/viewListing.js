@@ -1,77 +1,51 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const priceSelect = document.getElementById('price');
-    const locationSelect = document.getElementById('location');
-    const availabilitySelect = document.getElementById('availability');
-    const searchInput = document.getElementById('search');
-    const propertyList = document.querySelector('.property-list');
-  
-    const properties = [
-      { id: 1, price: 1500, location: 'New York City', availability: 'available', name: 'Studio A', description: 'A beautiful studio in NYC.' },
-      { id: 2, price: 2500, location: 'Los Angeles', availability: 'not-available', name: 'Studio B', description: 'A spacious studio in LA.' },
-      { id: 3, price: 3000, location: 'San Francisco', availability: 'available', name: 'Studio C', description: 'A modern studio in SF.' },
-      { id: 4, price: 1800, location: 'Chicago', availability: 'available', name: 'Studio D', description: 'A cozy studio in Chicago.' },
-    ];
-  
-    const uniquePrices = [...new Set(properties.map(p => p.price))];
-    const uniqueLocations = [...new Set(properties.map(p => p.location))];
-    const uniqueAvailability = [...new Set(properties.map(p => p.availability))];
-  
-    uniquePrices.sort((a, b) => a - b).forEach(price => {
-      const option = document.createElement('option');
-      option.value = price;
-      option.textContent = `$${price}`;
-      priceSelect.appendChild(option);
-    });
-  
-    uniqueLocations.forEach(location => {
-      const option = document.createElement('option');
-      option.value = location.toLowerCase().replace(' ', '-');
-      option.textContent = location;
-      locationSelect.appendChild(option);
-    });
-  
-    uniqueAvailability.forEach(status => {
-      const option = document.createElement('option');
-      option.value = status;
-      option.textContent = status.charAt(0).toUpperCase() + status.slice(1);
-      availabilitySelect.appendChild(option);
-    });
-  
-    function renderProperties(properties) {
-      propertyList.innerHTML = '';
-      properties.forEach(property => {
-        const propertyItem = document.createElement('div');
-        propertyItem.className = 'property-item';
-        propertyItem.innerHTML = `
-          <h3>${property.name}</h3>
-          <p class="price">$${property.price}</p>
-          <p class="location">${property.location}</p>
-          <p class="availability">${property.availability.charAt(0).toUpperCase() + property.availability.slice(1)}</p>
-          <p class="description">${property.description}</p>
-          <a href="./propertyDetails.html?id=${property.id}" class="view-details-btn">View Details</a>
-        `;
-        propertyList.appendChild(propertyItem);
-      });
+    const studioData = JSON.parse(localStorage.getItem('selectedStudio'));
+    if (!studioData) {
+      alert('No studio data found!');
+      window.location.href = 'studiolisting.html'; // Redirect if no data
+      return;
     }
   
-    renderProperties(properties);
+    const studioContainer = document.getElementById('studio-details');
+    studioContainer.innerHTML = `
+      <h1>${studioData.name}</h1>
+      <p><strong>Address:</strong> ${studioData.address}</p>
+      <p><strong>Area:</strong> ${studioData.area}</p>
+      <p><strong>Type:</strong> ${studioData.type}</p>
+      <p><strong>Capacity:</strong> ${studioData.capacity}</p>
+      <p><strong>Parking Available:</strong> ${studioData.hasParking}</p>
+      <p><strong>Public Transport Available:</strong> ${studioData.hasPublicTransport}</p>
+      <p><strong>Availability:</strong> ${studioData.availability}</p>
+      <p><strong>Rental Term:</strong> ${studioData.rentalTerm}</p>
+      <p><strong>Price per Term:</strong> $${studioData.pricePerTerm}</p>
+    `;
   
-    document.getElementById('filterButton').addEventListener('click', () => {
-      const selectedPrice = priceSelect.value;
-      const selectedLocation = locationSelect.value;
-      const selectedAvailability = availabilitySelect.value;
-      const searchQuery = searchInput.value.toLowerCase();
+    const ownerEmail = studioData.ownerEmail;
+    const userData = retrieveUserData();
+    const ownerData = userData.find(user => user.email === ownerEmail);
   
-      const filteredProperties = properties.filter(property => {
-        const matchesSearch = searchQuery === '' || property.name.toLowerCase().includes(searchQuery) || property.description.toLowerCase().includes(searchQuery);
-        const matchesPrice = selectedPrice === 'any' || property.price == selectedPrice;
-        const matchesLocation = selectedLocation === 'any' || property.location.toLowerCase().replace(' ', '-') === selectedLocation;
-        const matchesAvailability = selectedAvailability === 'any' || property.availability === selectedAvailability;
-        
-        return matchesSearch && matchesPrice && matchesLocation && matchesAvailability;
-      });
+    if (ownerData) {
+      const contactContainer = document.getElementById('contact-details');
+      contactContainer.innerHTML = `
+        <h2>Contact Information</h2>
+        <p><strong>Name:</strong> ${ownerData.name}</p>
+        <p><strong>Email:</strong> ${ownerData.email}</p>
+        <p><strong>Contact No:</strong> ${ownerData.contactNo}</p>
+      `;
+    }
   
-      renderProperties(filteredProperties);
+    const contactForm = document.getElementById('contact-form');
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('contact-name').value;
+      const message = document.getElementById('contact-message').value;
+      const contactNo = document.getElementById('contact-number').value;
+  
+      // Handle the form submission logic here
+      console.log('Form Submitted:', { name, message, contactNo });
+  
+      alert('Your message has been sent!');
+      contactForm.reset();
     });
   });
   
