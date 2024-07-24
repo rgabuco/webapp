@@ -75,3 +75,29 @@ footer {
   margin-top: 2rem;
   text-align: center;
 }
+
+/* BODY BUTTON */
+.body-btn {
+  padding: 10px; /* Adds padding inside the button */
+  background-color: black; /* Sets the background color */
+  color: white;
+  border: 1px solid gray; /* Removes the default border */
+  border-radius: 7px; /* Adds rounded corners */
+  cursor: pointer; /* Changes the cursor to a pointer */
+  transition: background-color 0.3s, transform 0.3s; /* Adds smooth transition effects */
+  font-size: medium;
+}
+
+.body-btn:hover {
+  background-color: white; /* Changes background color on hover */
+  color: black;
+  transform: scale(1.05); /* Slightly enlarges the button on hover */
+}
+
+.body-btn:active {
+  transform: scale(1); /* Resets the scale when the button is clicked */
+}
+
+.body-btn:focus {
+  outline: none; /* Removes the default focus outline */
+}
