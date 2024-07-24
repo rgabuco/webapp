@@ -25,7 +25,34 @@
     </div>
   </header>
   <main>
-
+    <section class="filters">
+      <div class="filter-group">
+        <label for="search">Search:</label>
+        <input type="text" id="search" placeholder="Search properties">
+      </div>
+      <div class="filter-group">
+        <label for="price">Price:</label>
+        <select id="price">
+          <option value="any">Any</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="location">Location:</label>
+        <select id="location">
+          <option value="any">Any</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="availability">Availability:</label>
+        <select id="availability">
+          <option value="any">Any</option>
+        </select>
+      </div>
+      <button class="body-btn" id="filterButton">Filter</button>
+    </section>
+    <section class="property-list">
+      <!-- Property items will be dynamically added here -->
+    </section>
   </main>
 </body>
 </html>
