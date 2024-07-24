@@ -12,13 +12,13 @@ $(document).ready(function() {
 
   // Only display the button if the user is an owner
   if (userRole === 'owner') {
-    $('#view-my-listing-btn').show();
+    $('#view-my-listing-div').show();
   } else {
-    $('#view-my-listing-btn').hide();
+    $('#view-my-listing-div').hide();
   }
 
-  // Event handler for the button click
-  $('.body-btn').click(function() {
+  // Event handler for the View My Listing button click
+  $('#view-my-listing-btn').click(function() {
     const buttonText = $(this).text();
 
     if (buttonText === 'View My Listing') {
@@ -29,6 +29,11 @@ $(document).ready(function() {
       displayAllListings();
     }
   });
+
+	// Event handler for the "Add Studio" button click
+	$('#add-studio-btn').click(function() {
+		window.location.href = 'addListing.html';
+	});
 
   // Function to display all listings
   function displayAllListings() {
