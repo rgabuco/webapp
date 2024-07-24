@@ -27,6 +27,13 @@ main h1 {
   transform: scale(1.05); /* Slightly enlarges the box on hover */
 }
 
+#view-my-listing-div,
+#add-studio-div {
+  display: flex;
+  justify-content: flex-end; /* Aligns the button to the right */
+  margin: 2rem 4rem 3rem 2rem; /* Adds some margin around the container */
+}
+
 /* Media Queries */
 @media (max-width: 1024px) {
   .studio-box {
