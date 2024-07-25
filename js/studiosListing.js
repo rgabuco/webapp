@@ -6,8 +6,10 @@ $(document).ready(function() {
 
   if (userRole === 'owner') {
     $('#view-my-listing-div').show();
+    $('#add-studio-btn').show();
   } else {
     $('#view-my-listing-div').hide();
+    $('#add-studio-btn').hide();
   }
 
   $('#view-my-listing-btn').click(function() {
