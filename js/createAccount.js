@@ -46,12 +46,6 @@ $(document).ready(function() {
             $('#error-message').text('Invalid input. Please enter a valid phone number!');
             return;
         }
-        // Error message to check if email is already signed up
-        if (isEmailAlreadySignedUp(email)) {
-            $('#error-message').css('color','red');
-            $('#error-message').text('Email is already signed up. Please login!');
-            return;
-        }
 
         // User object
         const userAccount = {
@@ -64,6 +58,15 @@ $(document).ready(function() {
         users.push(userAccount);
         saveUserData(users);
 
-        window.location.href = 'studiosListing.html';
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 3000);
+
+        // Error message to check if email is already signed up
+        if (isEmailAlreadySignedUp(email)) {
+            $('#error-message').css('color','green');
+            $('#error-message').text('Account successfuly created! Please login!');
+            return;
+        }
     });
 });
