@@ -1,19 +1,4 @@
 $(document).ready(function() {
-   
-    // Retrieve user data from local storage
-    function retrieveUserData() {
-        let storedData = localStorage.getItem('userData');
-        if (storedData) {
-            return JSON.parse(storedData);
-        }
-        return [];
-    }
-
-    // Save user data to the local storage
-    function saveUserData(userData) {
-        localStorage.setItem('userData', JSON.stringify(userData));
-    }
-
     $('#signup-btn').click(function(event) {
         event.preventDefault();
         
@@ -24,6 +9,10 @@ $(document).ready(function() {
         // Retrieve user data from local storage
         let users = retrieveUserData();
 
+        // Check email if already used
+        function isEmailAlreadyUsed(email) {
+            return users.some(user => user.email.toLowerCase() === email.toLowerCase());
+        }
         // Basic email validation
         function isValidEmail(email) {
             const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
@@ -40,13 +29,17 @@ $(document).ready(function() {
 
         // Clear previous error message
         $('#error-message').text('');
-
+        if (isEmailAlreadyUsed(email)) {
+            $('#error-message').css('color', 'red');
+            $('#error-message').text('The email address is already in use!');
+            return;
+        }
         // Error message to validate email
         if (!isValidEmail(email)) {
             $('#error-message').css('color','red');
             $('#error-message').text('Please enter a valid email address!');
             return;
-        } 
+        }     
         // Error message to validate phone number
         if (!isValidPhoneNumber(contactNo)) {
             $('#error-message').css('color','red');
