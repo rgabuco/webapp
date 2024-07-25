@@ -1,8 +1,19 @@
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  text-align: center;
+  padding: 1rem;
+}
+
 .slideshow {
   position: relative;
-  width: 200%;
+  width: 100%;
   max-width: 1000px;
-  height: 600px;
+  height: 60vw; /* Use a relative height for responsiveness */
+  max-height: 600px;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -22,15 +33,13 @@
   opacity: 1;
 }
 
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  text-align: center;
-}
-
 #main-text {
   margin-top: 2rem;
+}
+
+
+@media screen and (max-width: 768px) {
+  .slideshow {
+    height: 65vw; /* Increase height a bit for smaller screens */
+  }
 }
