@@ -33,6 +33,8 @@ select, button, input {
 }
 
 button {
+  background-color: black;
+  color: white;
   cursor: pointer;
 }
 
@@ -42,6 +44,10 @@ button {
     color: black;
     text-decoration: none;
   }
+}
+
+#create-account-link a:hover {
+  color: rgb(130, 130, 130);
 }
 
 @media screen and (max-width: 768px) {
