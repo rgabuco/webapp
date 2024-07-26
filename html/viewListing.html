@@ -19,9 +19,6 @@
     <div id="home" class="home-btn">
       <nav>
         <ul>
-          <li><a href="./account.html" class="nav-btn-plain-text">My Account</a></li>
-          <li><button id="add-studio-btn" class="nav-btn">Add Studio</button></li>
-          <li><button id="view-my-listing-btn" class="nav-btn">Edit Studio</button></li>
           <li><a href="../index.html" class="nav-btn-with-background">Logout</a></li>
         </ul>
       </nav>
@@ -30,31 +27,25 @@
 
   <!-- Main Content -->
   <main>
-    <div id="studio-details"></div>
-    <div id="contact-details"></div>
-
-    <button id="show-contact-info-btn">Show Contact Information</button>
-    
-    <div id="contact-info" style="display:none;">
-      <h2>Contact Information</h2>
-      <p id="contact-info-name"></p>
-      <p id="contact-info-email"></p>
-      <p id="contact-info-contactNo"></p>
+    <div id="studio-details" class="content-box"></div>
+    <div id="owner-details" class="content-box">
+      <div id="contact-details"></div>
     </div>
-
-    <h2>Contact the Owner</h2>
-    <form id="contact-form">
-      <label for="contact-name">Name:</label>
-      <input type="text" id="contact-name" name="contact-name" required>
-      <br>
-      <label for="contact-message">Message (100 characters max):</label>
-      <textarea id="contact-message" name="contact-message" maxlength="100" required></textarea>
-      <br>
-      <label for="contact-number">Contact Number:</label>
-      <input type="tel" id="contact-number" name="contact-number" required>
-      <br>
-      <button type="submit">Send Message</button>
-    </form>
+    <div id="owner-form" class="content-box">
+      <h2>Contact the Owner</h2>
+      <form id="contact-form">
+        <label for="contact-name">Name:</label>
+        <input type="text" id="contact-name" name="contact-name" required>
+        <br>
+        <label for="contact-message">Message (100 characters max):</label>
+        <textarea id="contact-message" name="contact-message" maxlength="100" required></textarea>
+        <br>
+        <label for="contact-number">Contact Number:</label>
+        <input type="tel" id="contact-number" name="contact-number" required>
+        <br>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
   </main>
 </body>
 </html>
