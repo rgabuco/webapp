@@ -4,11 +4,11 @@ function userAccount(name, email, contactNo) {
   this.contactNo = contactNo;
 }
 
-function studio(name, address, neighborhood, area, type, capacity, hasParking, hasPublicTransport, availability, rentalTerm, pricePerTerm, ownerEmail) {
+function studio(name, address, neighborhood, size, type, capacity, hasParking, hasPublicTransport, availability, rentalTerm, pricePerTerm, ownerEmail) {
   this.name = name;
   this.address = address;
   this.neighborhood = neighborhood;
-  this.area = area;
+  this.size = size;
   this.type = type;
   this.capacity = capacity;
   this.hasParking = hasParking;
@@ -66,12 +66,12 @@ function createDummyData() {
 
   let studioData = retrieveStudioData();
   if (!studioData.length) {
-    //name, address, neighborhood, area, type, capacity, hasParking, hasPublicTransport, availability, rentalTerm, pricePerTerm
-    studioData.push(new studio("John's Art Studio", "123 Main St", "Downtown", "150 sqm", "Art Studio", 10, "yes", "yes", "Available", "Month", 3000, "John.Doe@example.com"));
-    studioData.push(new studio("Jane's Recording Studio", "456 Main St", "Downtown", "80 sqm", "Recording Studio", 5, "yes", "no", "Available", "Day", 200, "Jane.Doe@example.com"));
-    studioData.push(new studio("JS Dance Studio", "789 Main St", "Edgemont", "200 sqm", "Dance Studio", 20, "yes", "yes", "Rented", "Hour", 50, "John.Smith@example.com"));
-    studioData.push(new studio("Smith Music Studio", "321 Main St", "Glendale", "120 sqm", "Music Studio", 15, "no", "yes", "Available", "Day", 300, "Jane.Smith@example.com"));
-    studioData.push(new studio("JJ Photography Studio", "654 Main St", "Downtown", "70 sqm", "Photography Studio", 8, "yes", "yes", "Rented", "Hour", 40, "John.Johnson@example.com"));
+    //name, address, neighborhood, size, type, capacity, hasParking, hasPublicTransport, availability, rentalTerm, pricePerTerm
+    studioData.push(new studio("John's Art Studio", "123 Main St", "Downtown", 150, "Art Studio", 10, "yes", "yes", "Available", "Month", 3000, "John.Doe@example.com"));
+    studioData.push(new studio("Jane's Recording Studio", "456 Main St", "Downtown", 80, "Recording Studio", 5, "yes", "no", "Available", "Day", 200, "Jane.Doe@example.com"));
+    studioData.push(new studio("JS Dance Studio", "789 Main St", "Edgemont", 200, "Dance Studio", 20, "yes", "yes", "Rented", "Hour", 50, "John.Smith@example.com"));
+    studioData.push(new studio("Smith Music Studio", "321 Main St", "Glendale", 120 , "Music Studio", 15, "no", "yes", "Available", "Day", 300, "Jane.Smith@example.com"));
+    studioData.push(new studio("JJ Photography Studio", "654 Main St", "Downtown", 70, "Photography Studio", 8, "yes", "yes", "Rented", "Hour", 40, "John.Johnson@example.com"));
     saveStudioData(studioData);
   }
 }

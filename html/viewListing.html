@@ -20,6 +20,8 @@
       <nav>
         <ul>
           <li><a href="./account.html" class="nav-btn-plain-text">My Account</a></li>
+          <li><button id="add-studio-btn" class="nav-btn">Add Studio</button></li>
+          <li><button id="view-my-listing-btn" class="nav-btn">Edit Studio</button></li>
           <li><a href="../index.html" class="nav-btn-with-background">Logout</a></li>
         </ul>
       </nav>
@@ -30,6 +32,15 @@
   <main>
     <div id="studio-details"></div>
     <div id="contact-details"></div>
+
+    <button id="show-contact-info-btn">Show Contact Information</button>
+    
+    <div id="contact-info" style="display:none;">
+      <h2>Contact Information</h2>
+      <p id="contact-info-name"></p>
+      <p id="contact-info-email"></p>
+      <p id="contact-info-contactNo"></p>
+    </div>
 
     <h2>Contact the Owner</h2>
     <form id="contact-form">

@@ -10,18 +10,18 @@ main h1 {
   flex-wrap: wrap;
   justify-content: center; /* Center the filter section */
   align-items: center; /* Center the filter section */
-  margin: 10px auto; /* Center the filter section horizontally */
+  margin: 20px auto; /* Center the filter section horizontally */
   padding: 10px;
   background-color: #f8f8f8;
   border: 1px solid #ddd;
   border-radius: 5px;
-  max-width: 800px;
+  max-width: 1000px;
 }
 
 .filter-group {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   margin: 10px;
 }
 
@@ -30,11 +30,28 @@ main h1 {
   font-weight: bold;
 }
 
-.filter-group select,
-.filter-group input {
+/* Styles for range filters */
+.range-filter {
+  display: flex;
+  align-items: center;
+}
+
+.range-filter input {
+  width: 100px; /* Width of the input boxes */
+  margin: 0 5px; /* Space between inputs and the span */
   padding: 4px;
   border: 1px solid #ccc;
   border-radius: 3px;
+}
+
+.range-filter span {
+  margin: 0 5px; /* Space around the 'to' label */
+}
+
+/* Center dropdown text */
+.filter-group select {
+  text-align: center; /* Center the text */
+  text-align-last: center; /* For certain browsers to ensure text alignment */
 }
 
 /* Specific Adjustments */
@@ -45,9 +62,46 @@ main h1 {
   margin-right: 10px; /* Add some space between the search bar and filters */
 }
 
-/* Adjust the margin of the filter button to move it to the right */
+/* Button Container */
+.filter-button-container {
+  display: flex;
+  justify-content: center; /* Center the button */
+  margin: 20px auto; /* Center horizontally and add spacing */
+  width: 100%; /* Ensure it takes full width */
+}
+
+/* Button Styles */
 #filterButton {
-  margin-left: 650px; /* Adjust as needed to create space between the button and the filters */
+  padding: 10px 20px; /* Adjust button padding for better appearance */
+  font-size: 1rem; /* Adjust font size for better readability */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  background-color: #666; /* Button background color */
+  color: #fff; /* Button text color */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth background color change */
+  width: auto; /* Button width adjusted based on its content */
+}
+
+#filterButton:hover {
+  background-color: #333; /* Darker background color on hover */
+}
+
+/* Clear Filters Button Styles */
+#clearFiltersButton {
+  padding: 10px 20px; /* Adjust button padding for better appearance */
+  font-size: 1rem; /* Adjust font size for better readability */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  background-color: #666; /* Button background color */
+  color: #fff; /* Button text color */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth background color change */
+  margin-left: 10px; /* Add space between buttons */
+}
+
+#clearFiltersButton:hover {
+  background-color: #333; /* Darker background color on hover */
 }
 
 /* Container holding studioBox elements */
@@ -121,6 +175,11 @@ main h1 {
     width: calc(45% - 20px); /* Two boxes per row on tablets */
     margin-bottom: 20px; /* Add space between rows */
   }
+
+  .filter-button-container {
+    margin-left: auto; /* Center the button container */
+    margin-right: auto;
+  }
 }
 
 @media (max-width: 768px) {
@@ -128,15 +187,55 @@ main h1 {
     width: calc(90% - 20px); /* One box per row on smaller screens */
     margin-bottom: 20px; /* Add space between rows */
   }
+
+  .filters {
+    flex-direction: column; /* Stack filters vertically on smaller screens */
+    align-items: stretch; /* Ensure filters take full width */
+  }
+
+  .filter-group {
+    align-items: stretch; /* Ensure filters take full width */
+  }
+
+  .filter-button-container {
+    width: 100%; /* Ensure the container takes full width */
+    margin-top: 20px; /* Adjust spacing */
+  }
+
+  #filterButton,
+  #clearFiltersButton {
+    width: 100%; /* Ensure the buttons take full width on mobile screens */
+    padding: 12px; /* Adjust padding for mobile screens */
+  }
 }
 
 @media (max-width: 480px) {
   #studios-container {
     gap: 1rem; /* Reduces space between boxes for smaller screens */
   }
+
   .studio-box {
     width: calc(100% - 20px); /* One box per row on mobile phones */
-    margin: 10px; 
-    padding: 10px; 
+    margin: 10px;
+    padding: 10px;
+  }
+
+  .filters {
+    padding: 5px; /* Reduce padding for smaller screens */
+    max-width: 100%; /* Ensure the filters take full width */
+  }
+
+  .filter-group {
+    margin: 5px 0; /* Reduce margin for smaller screens */
+  }
+
+  .filter-button-container {
+    margin-top: 20px; /* Adjust spacing */
+  }
+
+  #filterButton,
+  #clearFiltersButton {
+    width: 100%; /* Ensure the buttons take full width on mobile screens */
+    padding: 14px; /* Adjust padding for mobile screens */
   }
 }

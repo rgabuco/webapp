@@ -40,3 +40,19 @@ main {
     background-color: #444;
   }
   
+  .nav-btn {
+    border: none;
+    outline: none;
+    background-color: transparent; /* Set background color to transparent */
+    color: black;
+    font-size: 1.05rem;
+    text-decoration: none;
+    padding-top: 0.1rem;
+  }
+  
+  .nav-btn:hover {
+    color: gray;
+    text-decoration: underline;
+    text-underline-offset: 0.5rem;
+    cursor: pointer;
+  }

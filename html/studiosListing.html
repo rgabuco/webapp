@@ -35,12 +35,27 @@
       </div>
       <div class="filter-group">
         <label for="price">Price:</label>
-        <select id="price">
-          <option value="any">Any</option>
-        </select>
+        <div class="range-filter">
+          <input type="number" id="min-price" placeholder="Min">
+          <input type="number" id="max-price" placeholder="Max">
+        </div>
       </div>
       <div class="filter-group">
-        <label for="location">Location:</label>
+        <label for="capacity">Capacity:</label>
+        <div class="range-filter">
+          <input type="number" id="min-capacity" placeholder="Min">
+          <input type="number" id="max-capacity" placeholder="Max">
+        </div>
+      </div>
+      <div class="filter-group">
+        <label for="size">Size (sqm):</label>
+        <div class="range-filter">
+          <input type="number" id="min-size" placeholder="Min">
+          <input type="number" id="max-size" placeholder="Max">
+        </div>
+      </div>
+      <div class="filter-group">
+        <label for="location">Neighborhood:</label>
         <select id="location">
           <option value="any">Any</option>
         </select>
@@ -54,12 +69,6 @@
       <div class="filter-group">
         <label for="type">Type:</label>
         <select id="type">
-          <option value="any">Any</option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label for="capacity">Capacity:</label>
-        <select id="capacity">
           <option value="any">Any</option>
         </select>
       </div>
@@ -85,7 +94,10 @@
           <option value="any">Any</option>
         </select>
       </div>
-      <button class="body-btn" id="filterButton">Filter</button>
+    </div>
+    <div class="filter-button-container">
+      <button id="filterButton">Apply Filters</button>
+      <button id="clearFiltersButton">Clear Filters</button>
     </div>
     <div id="studios-container">
       <!-- studio data will be displayed here in boxes -->
