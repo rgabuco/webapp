@@ -6,10 +6,11 @@ $(document).ready(function() {
 
   // Show or hide buttons based on user role
   if (userRole === 'owner') {
-    $('#view-my-listing-div').show();
+    $('#view-my-listing-btn').show();
     $('#add-studio-btn').show();
   } else {
-    $('#view-my-listing-div').hide();
+    console.log("nav-btn will be hidden")
+    $('#view-my-listing-btn').hide();
     $('#add-studio-btn').hide();
   }
 
