@@ -5,6 +5,15 @@ main {
   margin: 0 auto;
 }
 
+.logo-link{
+  text-decoration: none;
+  color: black;
+}
+.logo{
+  font-family: 'Pacifico', cursive;
+  cursor: pointer;
+}
+
 .content-box {
   background-color: #fff;
   padding: 1.5rem;

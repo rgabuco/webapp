@@ -1,4 +1,12 @@
 
+.logo-link{
+  text-decoration: none;
+  color: black;
+}
+.logo{
+  font-family: 'Pacifico', cursive;
+  cursor: pointer;
+}
 /* Form styles */
 #account-details-form {
   border: 1px solid gray;
@@ -74,26 +82,24 @@ select, button, input {
 }
 
 /* Styling for the return link */
-#return {
+/* #return {
   text-align: right; 
   margin-top: 15px; 
   max-width: 768px; 
   margin-left: auto; 
   margin-right: auto; 
 }
-
 #return-link {
   font-size: x-large;
   text-decoration: underline;
   text-underline-offset: 0.4rem;
   color: #000; 
   padding: 5px 10px;
-  transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+  transition: background-color 0.3s, color 0.3s; 
 }
-
 #return-link:hover {
   color: darkgray; 
-}
+} */
 
 @media screen and (max-width: 768px) {
   #account-details-form {

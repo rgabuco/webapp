@@ -1,0 +1,8 @@
+.logo-link{
+  text-decoration: none;
+  color: black;
+}
+.logo{
+  font-family: 'Pacifico', cursive;
+  cursor: pointer;
+}
