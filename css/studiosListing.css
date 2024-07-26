@@ -98,18 +98,21 @@ main h1 {
 }
 
 /* Button Styles */
-.body-btn {
-  padding: 10px 20px;
-  background-color: #000;
-  color: #fff;
+.nav-btn {
   border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  outline: none;
+  background-color: transparent; /* Set background color to transparent */
+  color: black;
+  font-size: 1.05rem;
+  text-decoration: none;
+  padding-top: 0.1rem;
 }
 
-.body-btn:hover {
-  background-color: #444;
+.nav-btn:hover {
+  color: gray;
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
+  cursor: pointer;
 }
 
 /* Media Queries */
@@ -136,11 +139,4 @@ main h1 {
     margin: 10px; 
     padding: 10px; 
   }
-}
-
-#view-my-listing-div,
-#add-studio-div {
-  display: flex;
-  justify-content: flex-end; /* Aligns the button to the right */
-  margin: 2rem 4rem 3rem 2rem; /* Adds some margin around the container */
 }

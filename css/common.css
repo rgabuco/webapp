@@ -60,9 +60,9 @@ nav ul li {
 
 .nav-btn-plain-text {
   color: black;
-  font-size: large;
+  font-size: larger;
   text-decoration: none;
-  padding: 0.7rem;
+  padding: 0.7rem 0.1rem 0.7rem 0.7rem;
 }
 
 .nav-btn-plain-text:hover {
