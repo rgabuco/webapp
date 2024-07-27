@@ -1,6 +1,7 @@
 $(document).ready(function () {
   const userEmail = localStorage.getItem('userLoggedIn');
   const userData = retrieveUserData();
+  let studioData = retrieveStudioData();
   const userLoggedIn = userData.find(user => user.email.toLowerCase() === userEmail.toLowerCase());
   const selectedStudio = JSON.parse(localStorage.getItem('selectedStudio'));
   const $studioDetails = $('#studio-details');
@@ -218,6 +219,62 @@ $(document).ready(function () {
     } else {
         $('#save-btn').css('background-color', 'grey').prop('disabled', true);
     }
+  });
+
+  $(document).ready(function () {
+    // Show the modal when delete button is clicked
+    $(document).on('click', '#delete-btn', function() {
+      $('#deleteModal').css('display', 'block');
+    });
+  
+    // Get the modal
+    var modal = document.getElementById("deleteModal");
+  
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+  
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+  
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  
+    // Confirm delete button event handler
+    $(document).on('click', '#confirmDelete', function() {
+      console.log('Confirm delete button clicked');
+      // Proceed with deletion
+      console.log(selectedStudio);
+      studioData = studioData.filter(studio => {
+        return studio.name !== selectedStudio.name ||
+               studio.address !== selectedStudio.address ||
+               studio.neighborhood !== selectedStudio.neighborhood ||
+               studio.size !== selectedStudio.size ||
+               studio.type !== selectedStudio.type;
+      });
+      console.log(studioData);
+      
+      //save filtered 
+      saveStudioData(studioData);
+      // Show success message in the modal
+      $('.modal-content p').text('Deletion successful.');
+  
+      // Redirect to studiosListing.html after a short delay
+      setTimeout(function() {
+        window.location.href = 'studiosListing.html';
+      }, 2000);
+    });
+  
+    // Cancel delete button event handler
+    $('#cancelDelete').on('click', function() {
+      // Close the modal
+      modal.style.display = "none";
+    });
   });
 
 });
