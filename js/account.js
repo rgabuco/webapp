@@ -128,6 +128,12 @@ $(document).ready(function() {
 
     // Update the logged-in user email if changed
     localStorage.setItem('userLoggedIn', email);
+    
+    //update the userData.ownerEmail in studioData
+    let studioData = retrieveStudioData();
+    let studios = studioData.filter(studio => studio.ownerEmail.toLowerCase() === userEmail.toLowerCase());
+    studios.forEach(studio => studio.ownerEmail = email);
+    saveStudioData(studioData);
 
     $('#error-message').css('color', 'green');
     $('#error-message').text('Account details updated successfully!');
