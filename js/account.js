@@ -86,7 +86,7 @@ $(document).ready(function() {
     //reset the background color
     $('#save-btn').css('background-color', 'grey').prop('disabled', true)
 
-    if (name !== userLoggedIn.name || email !== userLoggedIn.email || contactNo !== userLoggedIn.contactNo) {
+    if (name.trim() !== userLoggedIn.name.trim() || email.trim() !== userLoggedIn.email.trim() || contactNo.trim() !== userLoggedIn.contactNo.trim()) {
       $('#save-btn').css({'background-color': 'black', 'cursor': 'pointer'}).prop('disabled', false)
     } else {
         $('#save-btn').css('background-color', 'grey').prop('disabled', true);
