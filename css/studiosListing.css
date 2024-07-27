@@ -172,7 +172,7 @@ main h1 {
 /* Media Queries */
 @media (max-width: 1024px) {
   .studio-box {
-    width: calc(45% - 20px); /* Two boxes per row on tablets */
+    width: calc(45% - 20px); 
     margin-bottom: 20px; /* Add space between rows */
   }
 
@@ -191,6 +191,7 @@ main h1 {
   .filters {
     flex-direction: column; /* Stack filters vertically on smaller screens */
     align-items: stretch; /* Ensure filters take full width */
+    width: 90%;
   }
 
   .filter-group {
@@ -198,7 +199,7 @@ main h1 {
   }
 
   .filter-button-container {
-    width: 100%; /* Ensure the container takes full width */
+    width: 60%; /* Ensure the container takes full width */
     margin-top: 20px; /* Adjust spacing */
   }
 
@@ -215,13 +216,14 @@ main h1 {
   }
 
   .studio-box {
-    width: calc(100% - 20px); /* One box per row on mobile phones */
+    width: calc(100% - 20px);
     margin: 10px;
     padding: 10px;
   }
 
   .filters {
     padding: 5px; /* Reduce padding for smaller screens */
+    align-items: stretch;
     max-width: 100%; /* Ensure the filters take full width */
   }
 
@@ -236,6 +238,12 @@ main h1 {
   #filterButton,
   #clearFiltersButton {
     width: 100%; /* Ensure the buttons take full width on mobile screens */
-    padding: 14px; /* Adjust padding for mobile screens */
+    padding: 8px; /* Adjust padding for mobile screens */
+  }
+  h1.logo{
+    font-size: 1.5rem;
+  }
+  ul, .nav-btn{
+    font-size: small;
   }
 }
