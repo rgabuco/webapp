@@ -1,5 +1,6 @@
 $(document).ready(function () {
   const userEmail = localStorage.getItem('userLoggedIn');
+  const userRole = localStorage.getItem('userRole');
   const userData = retrieveUserData();
   let studioData = retrieveStudioData();
   const userLoggedIn = userData.find(user => user.email.toLowerCase() === userEmail.toLowerCase());
@@ -71,6 +72,15 @@ $(document).ready(function () {
   }
   
   appendStudioDetails();
+
+  // Show edit and delete buttons only if userRole is owner and userEmail matches selectedStudio.workEmail
+  if (userRole === 'owner' && userEmail.toLowerCase() === selectedStudio.ownerEmail.toLowerCase()) {
+    $('#edit-btn').show();
+    $('#delete-btn').show();
+  } else {
+    $('#edit-btn').hide();
+    $('#delete-btn').hide();
+  }
 
   if ($contactForm.length) {
     if (selectedStudio.ownerEmail.toLowerCase() === userLoggedIn.email.toLowerCase()) {
@@ -224,56 +234,142 @@ $(document).ready(function () {
   $(document).ready(function () {
     // Show the modal when delete button is clicked
     $(document).on('click', '#delete-btn', function() {
-      $('#deleteModal').css('display', 'block');
+        $('#deleteModal').css('display', 'block');
     });
-  
+
     // Get the modal
-    var modal = document.getElementById("deleteModal");
-  
+    var deleteModal = document.getElementById("deleteModal");
+
     // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-  
+    var deleteSpan = document.getElementById("deleteClose");
+
     // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-      modal.style.display = "none";
+    deleteSpan.onclick = function() {
+        deleteModal.style.display = "none";
     }
-  
+
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
+        if (event.target == deleteModal) {
+            deleteModal.style.display = "none";
+        }
     }
-  
+
     // Confirm delete button event handler
     $(document).on('click', '#confirmDelete', function() {
-      console.log('Confirm delete button clicked');
-      // Proceed with deletion
-      console.log(selectedStudio);
-      studioData = studioData.filter(studio => {
-        return studio.name !== selectedStudio.name ||
-               studio.address !== selectedStudio.address ||
-               studio.neighborhood !== selectedStudio.neighborhood ||
-               studio.size !== selectedStudio.size ||
-               studio.type !== selectedStudio.type;
-      });
-      console.log(studioData);
-      
-      //save filtered 
-      saveStudioData(studioData);
-      // Show success message in the modal
-      $('.modal-content p').text('Deletion successful.');
-  
-      // Redirect to studiosListing.html after a short delay
-      setTimeout(function() {
-        window.location.href = 'studiosListing.html';
-      }, 2000);
+        console.log('Confirm delete button clicked');
+        // Proceed with deletion
+        console.log(selectedStudio);
+        studioData = studioData.filter(studio => {
+            return studio.name !== selectedStudio.name ||
+                   studio.address !== selectedStudio.address ||
+                   studio.neighborhood !== selectedStudio.neighborhood ||
+                   studio.size !== selectedStudio.size ||
+                   studio.type !== selectedStudio.type;
+        });
+        console.log(studioData);
+        
+        // Save filtered data
+        saveStudioData(studioData);
+        
+        // Show success message in the modal
+        $('.modal-content p').text('Deletion successful.');
+
+        // Redirect to studiosListing.html after a short delay
+        setTimeout(function() {
+            window.location.href = 'studiosListing.html';
+        }, 2000);
     });
-  
+
     // Cancel delete button event handler
     $('#cancelDelete').on('click', function() {
+        // Close the modal
+        deleteModal.style.display = "none";
+    });
+
+    // Show the modal when save button is clicked
+    $(document).on('click', '#save-btn', function() {
+        $('#saveModal').css('display', 'block');
+    });
+
+    // Get the modal
+    var saveModal = document.getElementById("saveModal");
+
+    // Get the <span> element that closes the modal
+    var saveSpan = document.getElementById("saveClose");
+
+    // When the user clicks on <span> (x), close the modal
+    saveSpan.onclick = function() {
+        saveModal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == saveModal) {
+            saveModal.style.display = "none";
+        }
+    }
+
+    // Confirm save button event handler
+    $(document).on('click', '#confirmSave', function() {
+        // Proceed with save logic
+        console.log('Save confirmed');
+        // Example save logic, replace with actual save functionality
+        // Save the updated data to local storage
+        let name = $('#name').val();
+        let address = $('#address').val();
+        let neighborhood = $('#neighborhood').val();
+        let size = parseFloat($('#size').val());
+        let type = $('#type').val();
+        let capacity = parseInt($('#capacity').val(), 10);
+        let hasParking = $('#hasParking').val();
+        let hasPublicTransport = $('#hasPublicTransport').val();
+        let availability = $('#availability').val();
+        let rentalTerm = $('#rentalTerm').val();
+        let pricePerTerm = parseFloat($('#pricePerTerm').val());
+
+        //update object values
+        selectedStudio.name = name;
+        selectedStudio.address = address;
+        selectedStudio.neighborhood = neighborhood;
+        selectedStudio.size = size;
+        selectedStudio.type = type;
+        selectedStudio.capacity = capacity;
+        selectedStudio.hasParking = hasParking;
+        selectedStudio.hasPublicTransport = hasPublicTransport;
+        selectedStudio.availability = availability;
+        selectedStudio.rentalTerm = rentalTerm;
+        selectedStudio.pricePerTerm = pricePerTerm;
+
+        //save selectedStudio to localStorage
+        localStorage.setItem('selectedStudio', JSON.stringify(selectedStudio));
+
+        // Save the updated data to local storage
+        studioData = studioData.map(studio => {
+            if (studio.name === selectedStudio.name && studio.address === selectedStudio.address && studio.neighborhood === selectedStudio.neighborhood && studio.size === selectedStudio.size && studio.type === selectedStudio.type) {
+                return selectedStudio;
+            }
+            return studio;
+        });
+        saveStudioData(studioData);
+
+        // Show success message in the modal
+        $('.modal-content p').text('Save successful.');
+
+        // Close the modal after a short delay
+        setTimeout(function() {
+            if (selectedStudio.ownerEmail && userLoggedIn.email && selectedStudio.ownerEmail.toLowerCase() === userLoggedIn.email.toLowerCase()) {
+                appendStudioDetails();
+            } else {
+                $studioDetails.html(displayStudioDetails(selectedStudio));
+            }
+            saveModal.style.display = "none";
+        }, 2000);
+    });
+    // Cancel delete button event handler
+    $('#cancelSave').on('click', function() {
       // Close the modal
-      modal.style.display = "none";
+      saveModal.style.display = "none";
     });
   });
 
