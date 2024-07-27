@@ -221,10 +221,10 @@ form select {
 
   #edit-delete-buttons {
       flex-direction: column;
+      margin-top: 1.5rem;
   }
 
   .alter-buttons {
-      margin-bottom: 1rem;
       width: 100%;
   }
 }
