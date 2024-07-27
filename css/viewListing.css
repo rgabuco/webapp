@@ -39,7 +39,7 @@ form label {
   font-weight: bold;
 }
 
-form input, form textarea {
+form input, form textarea, form select {
   margin-bottom: 1rem;
   padding: 0.5rem;
   border: 1px solid #ccc;
@@ -61,6 +61,51 @@ form button:hover {
   background-color: #555;
 }
 
+#studio-details label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+#studio-details input[type="text"],
+#studio-details input[type="number"],
+form select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+/* Edit Form */
+/*
+#studio-details {
+  margin: 0 auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+#studio-details h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#studio-details label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+#studio-details input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+*/
+
 /* Hide Elements by Default */
 #save-btn, #cancel-btn, #contact-info {
   display: none;
@@ -80,12 +125,15 @@ form button:hover {
   border-radius: 5px;
   background-color: black;
   color: #fff;
+}
+
+#cancel-btn:hover,
+#edit-btn:hover,
+#delete-btn:hover {
+  color: darkgray;
   cursor: pointer;
 }
 
-.alter-buttons:hover {
-  color: darkgray;
-}
 
 /* Responsive Design */
 @media (max-width: 768px) {
