@@ -23,7 +23,7 @@ $(document).ready(function() {
       localStorage.setItem('userLoggedIn', email);
 
       // Navigate to studiosListing.html if email is found
-      window.location.href = 'studiosListing.html';
+      window.location.href = 'home.html';
     }
   });
 });

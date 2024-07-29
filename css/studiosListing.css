@@ -18,6 +18,10 @@ main h1 {
   max-width: 1000px;
 }
 
+.logo{
+  cursor: pointer;
+}
+
 .filter-group {
   display: flex;
   flex-direction: column;
@@ -216,7 +220,7 @@ main h1 {
   }
 
   .studio-box {
-    width: calc(100% - 20px);
+    width: calc(100% - 20px); /* One box per row on mobile phones */
     margin: 10px;
     padding: 10px;
   }

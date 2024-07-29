@@ -17,6 +17,10 @@
   font-family: 'Pacifico', cursive;
   cursor: default;
 }
+.logo-link{
+  text-decoration: none;
+  color: black;
+}
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Figtree', sans-serif;
