@@ -8,7 +8,7 @@ $(document).ready(function() {
         
         // Retrieve user data from local storage
         let users = retrieveUserData();
-
+        
         // Check email if already used
         function isEmailAlreadyUsed(email) {
             return users.some(user => user.email.toLowerCase() === email.toLowerCase());
