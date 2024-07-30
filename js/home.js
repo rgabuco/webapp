@@ -22,3 +22,4 @@ $(document).ready(function() {
   // create dummy data on document ready
   createDummyData();
 });
+
