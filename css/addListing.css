@@ -47,6 +47,10 @@ button {
   margin-top: 2rem;
 }
 
+input.error, select.error {
+  border: 2px solid red;
+}
+
 @media screen and (max-width: 768px) {
   #add-listing {
     margin-left: 2rem;
