@@ -13,14 +13,27 @@ $(document).ready(function() {
         let isValid = true;
         const fields = ['#name', '#address', '#size', '#neighborhood', '#studio-type', '#capacity', '#price'];
         fields.forEach(field => {
+            const $field = $(field);
+            const $error = $field.siblings('.error-message');
+
             if ($(field).val().trim() === '') {
-                $(field).addClass('error');
+                $field.css('border','2px solid red');
+                if ($error.length === 0) {
+                    $field.after(`<span class="error-message" style="color: red"> This field is required.</span>`);
+                }
                 isValid = false;
             } else {
-                $(field).removeClass('error');
+                $field.css('border', '1px solid gray');
+                $error.remove();
             }
         });
         return isValid;
+    }
+
+    // Function to check if name is already used
+    function isNameDuplicate(name) {
+        const studioData = retrieveStudioData();
+        return studioData.some(studio => studio.name.toLowerCase() === name.toLowerCase());
     }
 
     // Event listener for form submission
@@ -61,8 +74,15 @@ $(document).ready(function() {
             ownerEmail: localStorage.getItem('userLoggedIn')
         };
 
-        let studioData = retrieveStudioData();
+        // Check if the name is duplicate
+        if (isNameDuplicate(name)) {
+            $('#error-message').css('color', 'red');
+            $('#error-message').text('The name is already in use. Please use a different name.')
+            return;
+        }
 
+        let studioData = retrieveStudioData();
+        
         studioData.push(newStudio);
 
         saveStudioData(studioData);
@@ -70,7 +90,17 @@ $(document).ready(function() {
         $('#add-listing form').trigger('reset');
 
         alert('Listing added successfully!');
-
         window.location.href = 'studiosListing.html';
+    });
+
+    // Event listener for input on form fields to remove error message
+    $('#add-listing form input, #add-listing form select').on('input', function () {
+        const $field = $(this);
+        const $error = $field.siblings('.error-message');
+
+        if ($field.val().trim() !== '') {
+            $field.css('border', '1px solid gray');
+            $error.remove();
+        }
     });
 });
