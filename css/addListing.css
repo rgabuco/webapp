@@ -48,14 +48,14 @@ button {
 }
 
 @media screen and (max-width: 768px) {
-  #add-listing-form {
+  #add-listing {
     margin-left: 2rem;
     margin-right: 2rem;
   }
 }
 
 @media screen and (max-width: 480px) {
-  #add-listing-form {
+  #add-listing {
     min-width: 300px;
     margin-left: 1rem;
     margin-right: 1rem;
