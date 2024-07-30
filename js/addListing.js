@@ -8,9 +8,30 @@ $(document).ready(function() {
         localStorage.setItem('studioData', JSON.stringify(data));
     }
 
+    // Function to validate form fields
+    function validateForm() {
+        let isValid = true;
+        const fields = ['#name', '#address', '#size', '#neighborhood', '#studio-type', '#capacity', '#price'];
+        fields.forEach(field => {
+            if ($(field).val().trim() === '') {
+                $(field).addClass('error');
+                isValid = false;
+            } else {
+                $(field).removeClass('error');
+            }
+        });
+        return isValid;
+    }
+
     // Event listener for form submission
     $('#add-listing form').on('submit', function(event) {
         event.preventDefault();
+
+        // Validate form fields
+        if (!validateForm()) {
+            alert('Please fill in all required fields.');
+            return;
+        }
 
         const name = $('#name').val();
         const adddress = $('#address').val();
@@ -51,5 +72,5 @@ $(document).ready(function() {
         alert('Listing added successfully!');
 
         window.location.href = 'studiosListing.html';
-    })
-})
+    });
+});
