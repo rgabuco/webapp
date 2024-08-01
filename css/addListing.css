@@ -40,6 +40,11 @@ select, button, input {
   color: black;
 }
 
+#error-message {
+  font-size: x-large;
+  margin-top: 2rem;
+}
+
 button {
   background-color: black;
   color: white;

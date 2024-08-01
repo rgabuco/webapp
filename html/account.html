@@ -12,19 +12,30 @@
 <body>
   <header>
     <div>
-      <a href="studiosListing.html" class="logo-link">
+      <a href="home.html" class="logo-link">
         <h1 class="logo">Creative Studio Rentals</h1>
       </a>
     </div>
     <div id="home" class="home-btn">
       <nav>
         <ul>
+          <li><a href="studiosListing.html" class="nav-btn-plain-text">Studio Listing</a></li>
           <li><a href="../index.html" class="nav-btn-with-background">Logout</a></li>
         </ul>
       </nav>
     </div>
   </header>
   <main>
+    <div id="saveModal" class="modal">
+      <div class="modal-content">
+        <span id="saveClose" class="close">&times;</span>
+        <p>Are you sure you want to save the changes?</p>
+        <div class="modal-buttons">
+          <button id="confirmSave" class="modal-btn">Yes</button>
+          <button id="cancelSave" class="modal-btn">Cancel</button>
+        </div>
+      </div>
+    </div>
     <div id="main-div">
       <div id="account-details-form">
         <h2>Account Details</h2>

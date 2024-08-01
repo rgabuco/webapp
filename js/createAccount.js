@@ -47,26 +47,77 @@ $(document).ready(function() {
             return;
         }
 
-        // User object
-        const userAccount = {
-            name: name,
-            email: email,
-            contactNo: contactNo
-        };
+        // Show modal after validation
+        $('#saveModal').css('display', 'block');
+        $('.modal-content p').text('Are you sure you want to create this account?');
+        $('#confirmSave').show();
+        $('#cancelSave').show();
+        console.log("Modal should be visible now");
 
-        // Add the user object to the local storage
-        users.push(userAccount);
-        saveUserData(users);
+        // Get the modal
+        var $saveModal = $("#saveModal");
 
-        setTimeout(() => {
-            window.location.href = 'login.html';
-        }, 3000);
+        // Get the <span> element that closes the modal
+        var $saveSpan = $("#saveClose");
 
-        // Error message to check if email is already signed up
-        if (isEmailAlreadySignedUp(email)) {
-            $('#error-message').css('color','green');
-            $('#error-message').text('Account successfuly created! Please login!');
-            return;
-        }
+        // When the user clicks on <span> (x), close the modal
+        $saveSpan.on("click", function() {
+            console.log("Close button clicked");
+            $saveModal.hide();
+            console.log("Modal should be hidden now");
+        });
+
+        // When the user clicks anywhere outside of the modal, close it
+        $(window).on("click", function(event) {
+            if ($(event.target).is($saveModal)) {
+            console.log("Clicked outside the modal");
+            $saveModal.hide();
+            console.log("Modal should be hidden now");
+            }
+        });
+        
+          // Confirm save button event handler
+        $(document).on('click', '#confirmSave', function(e) {
+            console.log("Confirm save button clicked");
+            e.preventDefault();
+
+            // Clear previous error message
+            $('#error-message').text('');
+
+            // User object
+            const userAccount = {
+                name: name,
+                email: email,
+                contactNo: contactNo
+            };
+
+            // Add the user object to the local storage
+            users.push(userAccount);
+            saveUserData(users);
+
+            // Close the modal after a short delay
+            setTimeout(function() {
+                saveModal.style.display = "none";
+                window.location.href = 'login.html';
+            }, 2000);
+
+            // Error message to check if email is already signed up
+            if (isEmailAlreadySignedUp(email)) {
+                // Show success message in the modal
+                $('.modal-content p').text('Account created successfully!');
+                $('#confirmSave').hide();
+                $('#cancelSave').hide();
+                console.log("Save successful message displayed");                       
+                return;
+            }
+        });
+
+        // Cancel save button event handler
+        $(document).on('click', '#cancelSave', function(e) {
+            e.preventDefault();
+            // Close the modal
+            $saveModal.hide();
+            console.log("Cancel button clicked, modal should be hidden now");
+        });
     });
 });

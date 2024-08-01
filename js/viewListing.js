@@ -235,6 +235,10 @@ $(document).ready(function () {
     // Show the modal when delete button is clicked
     $(document).on('click', '#delete-btn', function() {
         $('#deleteModal').css('display', 'block');
+        // Show success message in the modal
+        $('.modal-content p').text('Are you sure you want to delete this studio?');
+        $('#confirmDelete').show();
+        $('#cancelDelete').show();
     });
 
     // Get the modal
@@ -273,7 +277,9 @@ $(document).ready(function () {
         saveStudioData(studioData);
         
         // Show success message in the modal
-        $('.modal-content p').text('Deletion successful.');
+        $('.modal-content p').text('Studio deleted successfully.');
+        $('#confirmDelete').hide();
+        $('#cancelDelete').hide();
 
         // Redirect to studiosListing.html after a short delay
         setTimeout(function() {
@@ -290,6 +296,9 @@ $(document).ready(function () {
     // Show the modal when save button is clicked
     $(document).on('click', '#save-btn', function() {
         $('#saveModal').css('display', 'block');
+        $('.modal-content p').text('Are you sure you want to save the changes?');
+        $('#confirmSave').show();
+        $('#cancelSave').show();
     });
 
     // Get the modal
@@ -355,6 +364,8 @@ $(document).ready(function () {
 
         // Show success message in the modal
         $('.modal-content p').text('Save successful.');
+        $('#confirmSave').hide();
+        $('#cancelSave').hide();
 
         // Close the modal after a short delay
         setTimeout(function() {
