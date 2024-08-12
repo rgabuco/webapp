@@ -16,10 +16,8 @@ $(document).ready(function() {
   // Initialize the slideshow
   showSlide(currentIndex);
 
-  // Change slide every 5 seconds
-  setInterval(nextSlide, 5000);
+  // Change slide every 3 seconds
+  setInterval(nextSlide, 3000);
 
-  // create dummy data on document ready
-  createDummyData();
 });
 

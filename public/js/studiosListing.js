@@ -1,20 +1,64 @@
-$(document).ready(function() {
+$(document).ready(async function() {
   const userRole = localStorage.getItem('userRole');
   const userLoggedIn = localStorage.getItem('userLoggedIn');
-  const studiosString = localStorage.getItem('studioData');
-  let studios = studiosString ? JSON.parse(studiosString) : [];
+  let studios = [];
 
-  // Show or hide buttons based on user role
-  if (userRole === 'owner') {
-    $('#view-my-listing-btn').show();
-    $('#add-studio-btn').show();
-  } else {
-    console.log("nav-btn will be hidden")
-    $('#view-my-listing-btn').hide();
-    $('#add-studio-btn').hide();
+  // Define the input elements at the top
+  const nameInput = document.getElementById('search');
+  const minPriceInput = document.getElementById('min-price');
+  const maxPriceInput = document.getElementById('max-price');
+  const minCapacityInput = document.getElementById('min-capacity');
+  const maxCapacityInput = document.getElementById('max-capacity');
+  const minSizeInput = document.getElementById('min-size');
+  const maxSizeInput = document.getElementById('max-size');
+  const locationSelect = document.getElementById('location');
+  const availabilitySelect = document.getElementById('availability');
+  const typeSelect = document.getElementById('type');
+  const hasParkingSelect = document.getElementById('hasParking');
+  const hasPublicTransportSelect = document.getElementById('hasPublicTransport');
+  const rentalTermSelect = document.getElementById('rentalTerm');
+
+  // Fetch studio data using retrieveStudioData function from common.js
+  try {
+    studios = await retrieveStudioData();
+    initializePage();
+  } catch (error) {
+    console.error('Error retrieving studio data:', error);
   }
 
-  $('#view-my-listing-btn').click(function() {
+  function initializePage() {
+    toggleButtonsBasedOnUserRole();
+    setupEventListeners();
+    populateSelectOptions();
+    displayAllListings();
+  }
+
+  function toggleButtonsBasedOnUserRole() {
+    if (userRole === 'owner') {
+      $('#view-my-listing-btn').show();
+      $('#add-studio-btn').show();
+    } else {
+      console.log("nav-btn will be hidden");
+      $('#view-my-listing-btn').hide();
+      $('#add-studio-btn').hide();
+    }
+  }
+
+  function setupEventListeners() {
+    $('#view-my-listing-btn').click(toggleListingsView);
+    $('#add-studio-btn').click(() => window.location.href = 'addListing.html');
+    $('#filterButton').click(applyFilters);
+    $('#clearFiltersButton').click(clearFilters);
+
+    nameInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        applyFilters();
+      }
+    });
+  }
+
+  function toggleListingsView() {
     const buttonText = $(this).text();
     if (buttonText === 'View My Listings') {
       $(this).text('View All Listings');
@@ -23,11 +67,7 @@ $(document).ready(function() {
       $(this).text('View My Listings');
       displayAllListings();
     }
-  });
-
-  $('#add-studio-btn').click(function() {
-    window.location.href = 'addListing.html';
-  });
+  }
 
   function displayAllListings() {
     $('#studios-container').empty();
@@ -48,7 +88,6 @@ $(document).ready(function() {
   function createStudioBox(studio) {
     const studioBox = $('<div class="studio-box"></div>');
     studioBox.append($('<h3></h3>').text(studio.name));
-    /*studioBox.append($('<p></p>').text('Address: ' + studio.address));*/
     studioBox.append($('<p></p>').text('Neighborhood: ' + studio.neighborhood));
     studioBox.append($('<p></p>').text('Size: ' + studio.size + ' sqm'));
     studioBox.append($('<p></p>').text('Type: ' + studio.type));
@@ -62,20 +101,6 @@ $(document).ready(function() {
     });
     return studioBox;
   }
-
-  const nameInput = document.getElementById('search');
-  const minPriceInput = document.getElementById('min-price');
-  const maxPriceInput = document.getElementById('max-price');
-  const minCapacityInput = document.getElementById('min-capacity');
-  const maxCapacityInput = document.getElementById('max-capacity');
-  const minSizeInput = document.getElementById('min-size');
-  const maxSizeInput = document.getElementById('max-size');
-  const locationSelect = document.getElementById('location');
-  const availabilitySelect = document.getElementById('availability');
-  const typeSelect = document.getElementById('type');
-  const hasParkingSelect = document.getElementById('hasParking');
-  const hasPublicTransportSelect = document.getElementById('hasPublicTransport');
-  const rentalTermSelect = document.getElementById('rentalTerm');
 
   function populateSelectOptions() {
     const uniqueLocations = [...new Set(studios.map(p => p.neighborhood))].sort();
@@ -102,8 +127,6 @@ $(document).ready(function() {
     populateSelect(hasParkingSelect, ['any', 'Yes', 'No']);
     populateSelect(hasPublicTransportSelect, ['any', 'Yes', 'No']);
   }
-
-  populateSelectOptions();
 
   function applyFilters() {
     const selectedName = nameInput.value.toLowerCase();
@@ -184,6 +207,4 @@ $(document).ready(function() {
 
   $('#filterButton').click(applyFilters);
   $('#clearFiltersButton').click(clearFilters);
-
-  displayAllListings();
 });

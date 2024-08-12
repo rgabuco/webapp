@@ -1,8 +1,25 @@
-$(document).ready(function () {
+$(document).ready(async function () {
   const userEmail = localStorage.getItem('userLoggedIn');
   const userRole = localStorage.getItem('userRole');
-  const userData = retrieveUserData();
-  let studioData = retrieveStudioData();
+  
+  let userData, studioData;
+  
+  try {
+    userData = await retrieveUserData();
+  } catch (error) {
+    console.error('Error retrieving user data:', error);
+    alert('An error occurred while retrieving user data. Please try again later.');
+    return;
+  }
+  
+  try {
+    studioData = await retrieveStudioData();
+  } catch (error) {
+    console.error('Error retrieving studio data:', error);
+    alert('An error occurred while retrieving studio data. Please try again later.');
+    return;
+  }
+  
   const userLoggedIn = userData.find(user => user.email.toLowerCase() === userEmail.toLowerCase());
   const selectedStudio = JSON.parse(localStorage.getItem('selectedStudio'));
   const $studioDetails = $('#studio-details');
@@ -68,6 +85,8 @@ $(document).ready(function () {
       `);
     } else {
       console.log('Studio cannot be edited');
+      console.log('Owner Email:', selectedStudio.ownerEmail);
+      console.log('User Logged In Email:', userLoggedIn.email);
     }
   }
   
@@ -106,7 +125,7 @@ $(document).ready(function () {
     $(this).trigger('reset');
   });
 
-  //Edit button event handler
+  // Edit button event handler
   $(document).on('click', '#edit-btn', function() {
     $studioDetails.html(`
       <h1>${selectedStudio.name}</h1>
@@ -119,8 +138,17 @@ $(document).ready(function () {
               case 'name':
               case 'address':
               case 'neighborhood':
-              case 'type':
                 inputElement = `<input type="text" id="${key}" name="${key}" value="${selectedStudio[key]}" class="form-input">`;
+                break;
+              case 'type':
+                inputElement = `
+                  <select id="${key}" name="${key}" class="form-select">
+                    <option value="Photography Studio" ${selectedStudio[key] === 'Photography' ? 'selected' : ''}>Photography</option>
+                    <option value="Art Studio" ${selectedStudio[key] === 'Art' ? 'selected' : ''}>Art</option>
+                    <option value="Music Studio" ${selectedStudio[key] === 'Music' ? 'selected' : ''}>Music</option>
+                    <option value="Recording Studio" ${selectedStudio[key] === 'Recording' ? 'selected' : ''}>Recording</option>
+                    <option value="Film" ${selectedStudio[key] === 'Film' ? 'selected' : ''}>Film</option>
+                  </select>`;
                 break;
               case 'size':
               case 'capacity':
@@ -183,7 +211,7 @@ $(document).ready(function () {
     $('#cancel-btn').show().prop('disabled', false);
   });
 
-  //Cancel button event handler
+  // Cancel button event handler
   $(document).on('click', '#cancel-btn', function() {
     if (selectedStudio.ownerEmail && userLoggedIn.email && selectedStudio.ownerEmail.toLowerCase() === userLoggedIn.email.toLowerCase()) {
       appendStudioDetails();
@@ -191,6 +219,8 @@ $(document).ready(function () {
       $studioDetails.html(displayStudioDetails(selectedStudio));
     }
   });
+
+  let oldStudioName = selectedStudio.name;
 
   // Enable save button only if there are changes
   $(document).on('input', function() {
@@ -209,7 +239,7 @@ $(document).ready(function () {
     console.log('Input event triggered');
     console.log('Selected Studio:', selectedStudio);
     console.log('Input Values:', { name, address, neighborhood, size, type, capacity, hasParking, hasPublicTransport, availability, rentalTerm, pricePerTerm });
-   
+  
     // Reset the background color and disable the button by default
     $('#save-btn').css('background-color', 'grey').prop('disabled', true);
 
@@ -235,7 +265,6 @@ $(document).ready(function () {
     // Show the modal when delete button is clicked
     $(document).on('click', '#delete-btn', function() {
         $('#deleteModal').css('display', 'block');
-        // Show success message in the modal
         $('.modal-content p').text('Are you sure you want to delete this studio?');
         $('#confirmDelete').show();
         $('#cancelDelete').show();
@@ -260,37 +289,37 @@ $(document).ready(function () {
     }
 
     // Confirm delete button event handler
-    $(document).on('click', '#confirmDelete', function() {
-        console.log('Confirm delete button clicked');
-        // Proceed with deletion
-        console.log(selectedStudio);
-        studioData = studioData.filter(studio => {
-            return studio.name !== selectedStudio.name ||
-                   studio.address !== selectedStudio.address ||
-                   studio.neighborhood !== selectedStudio.neighborhood ||
-                   studio.size !== selectedStudio.size ||
-                   studio.type !== selectedStudio.type;
-        });
-        console.log(studioData);
-        
-        // Save filtered data
-        saveStudioData(studioData);
-        
-        // Show success message in the modal
+    $(document).on('click', '#confirmDelete', async function() {
+      console.log('Confirm delete button clicked');
+      // Proceed with deletion
+      console.log(selectedStudio);
+      studioData = studioData.filter(studio => {
+        return studio.name !== selectedStudio.name ||
+               studio.address !== selectedStudio.address ||
+               studio.neighborhood !== selectedStudio.neighborhood ||
+               studio.size !== selectedStudio.size ||
+               studio.type !== selectedStudio.type;
+      });
+      console.log(studioData);
+      
+      try {
+        await saveStudioData(studioData);
         $('.modal-content p').text('Studio deleted successfully.');
         $('#confirmDelete').hide();
         $('#cancelDelete').hide();
-
-        // Redirect to studiosListing.html after a short delay
+    
         setTimeout(function() {
-            window.location.href = 'studiosListing.html';
+          window.location.href = 'studiosListing.html';
         }, 2000);
+      } catch (error) {
+        console.error('Error saving studio data:', error);
+        alert('An error occurred while deleting the studio. Please try again later.');
+      }
     });
 
     // Cancel delete button event handler
     $('#cancelDelete').on('click', function() {
-        // Close the modal
-        deleteModal.style.display = "none";
+      deleteModal.style.display = "none";
     });
 
     // Show the modal when save button is clicked
@@ -320,68 +349,71 @@ $(document).ready(function () {
     }
 
     // Confirm save button event handler
-    $(document).on('click', '#confirmSave', function() {
-        // Proceed with save logic
-        console.log('Save confirmed');
-        // Example save logic, replace with actual save functionality
-        // Save the updated data to local storage
-        let name = $('#name').val();
-        let address = $('#address').val();
-        let neighborhood = $('#neighborhood').val();
-        let size = parseFloat($('#size').val());
-        let type = $('#type').val();
-        let capacity = parseInt($('#capacity').val(), 10);
-        let hasParking = $('#hasParking').val();
-        let hasPublicTransport = $('#hasPublicTransport').val();
-        let availability = $('#availability').val();
-        let rentalTerm = $('#rentalTerm').val();
-        let pricePerTerm = parseFloat($('#pricePerTerm').val());
-
-        //update object values
-        selectedStudio.name = name;
-        selectedStudio.address = address;
-        selectedStudio.neighborhood = neighborhood;
-        selectedStudio.size = size;
-        selectedStudio.type = type;
-        selectedStudio.capacity = capacity;
-        selectedStudio.hasParking = hasParking;
-        selectedStudio.hasPublicTransport = hasPublicTransport;
-        selectedStudio.availability = availability;
-        selectedStudio.rentalTerm = rentalTerm;
-        selectedStudio.pricePerTerm = pricePerTerm;
-
-        //save selectedStudio to localStorage
-        localStorage.setItem('selectedStudio', JSON.stringify(selectedStudio));
-
-        // Save the updated data to local storage
-        studioData = studioData.map(studio => {
-            if (studio.name === selectedStudio.name && studio.address === selectedStudio.address && studio.neighborhood === selectedStudio.neighborhood && studio.size === selectedStudio.size && studio.type === selectedStudio.type) {
-                return selectedStudio;
-            }
-            return studio;
-        });
-        saveStudioData(studioData);
-
-        // Show success message in the modal
+    $(document).on('click', '#confirmSave', async function() {
+      console.log('Save confirmed');
+      let name = $('#name').val();
+      let address = $('#address').val();
+      let neighborhood = $('#neighborhood').val();
+      let size = parseFloat($('#size').val());
+      let type = $('#type').val();
+      let capacity = parseInt($('#capacity').val(), 10);
+      let hasParking = $('#hasParking').val();
+      let hasPublicTransport = $('#hasPublicTransport').val();
+      let availability = $('#availability').val();
+      let rentalTerm = $('#rentalTerm').val();
+      let pricePerTerm = parseFloat($('#pricePerTerm').val());
+  
+      selectedStudio.name = name;
+      selectedStudio.address = address;
+      selectedStudio.neighborhood = neighborhood;
+      selectedStudio.size = size;
+      selectedStudio.type = type;
+      selectedStudio.capacity = capacity;
+      selectedStudio.hasParking = hasParking;
+      selectedStudio.hasPublicTransport = hasPublicTransport;
+      selectedStudio.availability = availability;
+      selectedStudio.rentalTerm = rentalTerm;
+      selectedStudio.pricePerTerm = pricePerTerm;
+  
+      localStorage.setItem('selectedStudio', JSON.stringify(selectedStudio));
+  
+      const studioIndex = studioData.findIndex(studio => 
+        studio.name === selectedStudio.name || studio.name === oldStudioName
+      );
+      
+      if (studioIndex !== -1) {
+        console.log(`Updating studio at index ${studioIndex} with new data:`, selectedStudio);
+        // Update the studio at the found index
+        studioData[studioIndex] = { ...studioData[studioIndex], ...selectedStudio };
+      } else {
+        console.warn('No matching studio found to update.');
+      }
+      console.log('Updated studioData:', studioData);
+      
+  
+      try {
+        await saveStudioData(studioData);
         $('.modal-content p').text('Save successful.');
         $('#confirmSave').hide();
         $('#cancelSave').hide();
-
-        // Close the modal after a short delay
+  
         setTimeout(function() {
-            if (selectedStudio.ownerEmail && userLoggedIn.email && selectedStudio.ownerEmail.toLowerCase() === userLoggedIn.email.toLowerCase()) {
-                appendStudioDetails();
-            } else {
-                $studioDetails.html(displayStudioDetails(selectedStudio));
-            }
-            saveModal.style.display = "none";
+          if (selectedStudio.ownerEmail && userLoggedIn.email && selectedStudio.ownerEmail.toLowerCase() === userLoggedIn.email.toLowerCase()) {
+            appendStudioDetails();
+          } else {
+            $studioDetails.html(displayStudioDetails(selectedStudio));
+          }
+          saveModal.style.display = "none";
         }, 2000);
+      } catch (error) {
+        console.error('Error saving studio data:', error);
+        alert('An error occurred while saving the studio. Please try again later.');
+      }
     });
-    // Cancel delete button event handler
+
+    // Cancel save button event handler
     $('#cancelSave').on('click', function() {
-      // Close the modal
       saveModal.style.display = "none";
     });
   });
-
 });
