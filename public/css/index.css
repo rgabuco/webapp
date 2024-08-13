@@ -50,7 +50,7 @@ main {
 /* Slogan section styles */
 #slogan {
   text-align: center;
-  font-size: 1.2em;
+  font-size: 1em;
   margin: 1rem 0; /* Adjust margin as needed */
   font-family: 'Figtree', sans-serif; /* Consistent font with other text */
 }
