@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(async function() {
   console.log("Document is ready");
 
   // Basic email validation
@@ -17,12 +17,14 @@ $(document).ready(function() {
   let userEmail = localStorage.getItem('userLoggedIn');
   console.log("User email from localStorage:", userEmail);
 
-  let userData = retrieveUserData();
-  if (!userData) {
-    console.error('Failed to retrieve user data');
+  let userData;
+  try {
+    userData = await retrieveUserData(); // Await the promise
+    console.log("User data retrieved:", userData);
+  } catch (error) {
+    console.error('Failed to retrieve user data', error);
     return;
   }
-  console.log("User data retrieved:", userData);
 
   let userLoggedIn = userData.find(user => user.email.toLowerCase() === userEmail.toLowerCase());
   if (!userLoggedIn) {
@@ -142,7 +144,7 @@ $(document).ready(function() {
   }
 
   // Confirm save button event handler
-  $(document).on('click', '#confirmSave', function(e) {
+  $(document).on('click', '#confirmSave', async function(e) { // Add async here
     console.log("Confirm save button clicked");
     e.preventDefault();
 
@@ -176,23 +178,48 @@ $(document).ready(function() {
     userLoggedIn.email = email;
     userLoggedIn.contactNo = contactNo;
 
-    // Update the local storage
-    saveUserData(userData);
+    console.log("User object updated:", userLoggedIn);
+
+    // Save the updated user data
+    await saveUserData(userData);
     console.log("User data saved");
 
-    // Update the logged-in user email if changed
-    localStorage.setItem('userLoggedIn', email);
-
     // Update the userData.ownerEmail in studioData
-    let studioData = retrieveStudioData();
-    if (studioData) {
+    let studioData;
+    try {
+      studioData = await retrieveStudioData(); // Re-fetch studio data
+      console.log("Studio data retrieved:", studioData);
+    } catch (error) {
+      console.error('Failed to retrieve studio data', error);
+      return;
+    }
+
+    // Log the ownerEmail of each studio before filtering
+    studioData.forEach(studio => {
+      console.log(`Studio: ${studio.name}, ownerEmail: ${studio.ownerEmail}`);
+    });
+
+    console.log("Filtering studios with ownerEmail:", userEmail);
+
+    if (Array.isArray(studioData)) {
       let studios = studioData.filter(studio => studio.ownerEmail.toLowerCase() === userEmail.toLowerCase());
-      studios.forEach(studio => studio.ownerEmail = email);
-      saveStudioData(studioData);
+      console.log("Filtered studios with matching ownerEmail:", studios);
+
+      studios.forEach(studio => {
+        console.log(`Updating studio: ${studio.name}, old ownerEmail: ${studio.ownerEmail}, new ownerEmail: ${email}`);
+        studio.ownerEmail = email; // Update the ownerEmail
+      });
+
+      await saveStudioData(studioData); // Save updated studio data
       console.log("Studio data updated");
     } else {
-      console.error('Failed to retrieve studio data');
+      console.error('Failed to retrieve studio data or studio data is not an array');
     }
+
+    // Update the local storage after updating studio data
+    localStorage.setItem('userLoggedIn', email);
+    userEmail = email; // Update userEmail to the new email
+    console.log("Local storage updated with new email:", email);
 
     // Show success message in the modal
     $('.modal-content p').text('Save successful.');

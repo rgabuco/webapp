@@ -1,22 +1,14 @@
 $(document).ready(function() {
 
-    function retrieveStudioData() {
-        return JSON.parse(localStorage.getItem('studioData'));
-    }
-
-    function saveStudioData(data) {
-        localStorage.setItem('studioData', JSON.stringify(data));
-    }
-
     // Function to validate form fields
     function validateForm() {
         let isValid = true;
-        const fields = ['#name', '#address', '#size', '#neighborhood', '#studio-type', '#capacity', '#price'];
+        const fields = ['#name', '#address', '#size', '#neighborhood', '#capacity', '#price'];
         fields.forEach(field => {
             const $field = $(field);
             const $error = $field.siblings('.error-message');
 
-            if ($(field).val().trim() === '') {
+            if ($field.val().trim() === '') {
                 $field.css('border','2px solid red');
                 if ($error.length === 0) {
                     $field.after(`<span class="error-message" style="color: red"> This field is required.</span>`);
@@ -31,13 +23,13 @@ $(document).ready(function() {
     }
 
     // Function to check if name is already used
-    function isNameDuplicate(name) {
-        const studioData = retrieveStudioData();
+    async function isNameDuplicate(name) {
+        const studioData = await retrieveStudioData();
         return studioData.some(studio => studio.name.toLowerCase() === name.toLowerCase());
     }
 
     // Event listener for form submission
-    $('#add-listing form').on('submit', function(event) {
+    $('#add-listing form').on('submit', async function(event) {
         event.preventDefault();
 
         // Validate form fields
@@ -47,21 +39,21 @@ $(document).ready(function() {
         }
 
         const name = $('#name').val();
-        const adddress = $('#address').val();
+        const address = $('#address').val();
         const neighborhood = $('#neighborhood').val();
         const size = parseFloat($('#size').val());
         const type = $('#studio-type').val();
-        const capacity = parseInt($('#name').val());
+        const capacity = parseInt($('#capacity').val());
         const hasParking = $('#hasParking').val();
         const hasPublicTransport = $('#hasPublicTransport').val();
         const availability = 'Available';
         const rentalTerm = $('#rentalTerm').val();
-        const price = parseFloat($('#price').val());
+        const pricePerTerm = parseFloat($('#price').val());
 
         // Create a new studio object
         const newStudio = {
             name,
-            adddress,
+            address,
             neighborhood,
             size,
             type,
@@ -70,22 +62,22 @@ $(document).ready(function() {
             hasPublicTransport,
             availability,
             rentalTerm,
-            price,
+            pricePerTerm,
             ownerEmail: localStorage.getItem('userLoggedIn')
         };
 
         // Check if the name is duplicate
-        if (isNameDuplicate(name)) {
+        if (await isNameDuplicate(name)) {
             $('#error-message').css('color', 'red');
             $('#error-message').text('The name is already in use. Please use a different name.')
             return;
         }
 
-        let studioData = retrieveStudioData();
+        let studioData = await retrieveStudioData();
         
         studioData.push(newStudio);
 
-        saveStudioData(studioData);
+        await saveStudioData(studioData);
 
         $('#add-listing form').trigger('reset');
 
