@@ -41,3 +41,19 @@ form {
     font-family: 'Pacifico', cursive;
     cursor: pointer;
   }
+
+  @media screen and (max-width: 768px) {
+    form {
+      margin-left: 2rem;
+      margin-right: 2rem;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    form {
+      min-width: 300px;
+      margin-left: 1rem;
+      margin-right: 1rem;
+      padding: 1rem;
+    }
+  }
