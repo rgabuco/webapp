@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#signup-btn').click(function(event) {
+    $('#signup-btn').click(async function(event) {
         event.preventDefault();
         
         let name = $('#name').val();
@@ -7,7 +7,7 @@ $(document).ready(function() {
         let contactNo = $('#contact-no').val();
         
         // Retrieve user data from local storage
-        let users = retrieveUserData();
+        let users = await retrieveUserData();
 
         // Check email if already used
         function isEmailAlreadyUsed(email) {
@@ -77,7 +77,7 @@ $(document).ready(function() {
         });
         
           // Confirm save button event handler
-        $(document).on('click', '#confirmSave', function(e) {
+        $(document).on('click', '#confirmSave', async function(e) {
             console.log("Confirm save button clicked");
             e.preventDefault();
 
@@ -93,7 +93,7 @@ $(document).ready(function() {
 
             // Add the user object to the local storage
             users.push(userAccount);
-            saveUserData(users);
+            await saveUserData(users);
 
             // Close the modal after a short delay
             setTimeout(function() {
