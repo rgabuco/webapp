@@ -1,117 +1,184 @@
 /* Existing styles */
 main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-    text-align: center;
-    padding: 1rem;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  text-align: center;
+  padding: 1rem;
+}
+
+.photo-row {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+  flex-wrap: wrap; /* Ensure responsiveness */
+}
+
+.photo {
+  width: 250px; /* Fixed width for consistency */
+  height: 150px; /* Fixed height for consistency */
+  object-fit: cover; /* Ensure the image covers the area without distortion */
+  border-radius: 8px;
+  transition: transform 0.3s;
+}
+
+.photo:hover {
+  transform: scale(1.05);
+}
+
+#main-text {
+  margin-top: 2rem;
+}
+
+@media screen and (max-width: 768px) {
   .photo-row {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin: 1rem 0;
-    flex-wrap: wrap; /* Ensure responsiveness */
-  }
-  
-  .photo {
-    width: 250px; /* Fixed width for consistency */
-    height: 150px; /* Fixed height for consistency */
-    object-fit: cover; /* Ensure the image covers the area without distortion */
-    border-radius: 8px;
-    transition: transform 0.3s;
-  }
-  
-  .photo:hover {
-    transform: scale(1.05);
-  }
-  
-  #main-text {
-    margin-top: 2rem;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .photo-row {
       flex-direction: column;
       align-items: center;
-    }
-  
-    .photo {
+  }
+
+  .photo {
       width: 80%; /* Adjust width for smaller screens */
       height: auto; /* Maintain aspect ratio on small screens */
-    }
   }
-  
-  /* New styles */
-  
-  /* Slogan section styles */
-  #slogan {
-    text-align: center;
-    font-size: 1em;
-    margin: 1rem 0; /* Adjust margin as needed */
-    font-family: 'Figtree', sans-serif; /* Consistent font with other text */
-  }
-  
-  /* Customer reviews section styles */
-  #reviews {
-    margin: 3rem auto;
-    max-width: 800px;
-    padding: 0 1rem; /* Add padding for smaller screens */
-  }
-  
+}
+
+/* Customer reviews section styles */
+#reviews {
+  margin: 3rem auto;
+  max-width: 800px;
+  padding: 0 1rem; /* Add padding for smaller screens */
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 2fr);
+  gap: 1rem; /* Adjust spacing between reviews */
+}
+
+.review {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.review-photo {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  margin-right: 1rem; /* Space between photo and content */
+}
+
+.review-content {
+  flex: 1;
+  text-align: left;
+}
+
+.review-rating .star {
+  color: gold;
+  font-size: 1.2em;
+}
+
+.review-rating {
+  margin-bottom: 0.5rem; /* Space between rating and text */
+}
+
+.review-content h3 {
+  margin: 0;
+  font-family: 'Figtree', sans-serif; /* Consistent font with other headings */
+}
+
+/* Ensure consistency in buttons and links within reviews */
+.review-content p {
+  font-family: 'Alegreya Sans', sans-serif; /* Maintain font consistency with body */
+}
+
+@media screen and (max-width: 768px) {
   .reviews-grid {
-    display:list-item;
-    grid-template-columns: repeat(2, 2fr);
-    gap: 1rem; /* Adjust spacing between reviews */
-  }
-  
-  .review {
-    display: flex;
-    align-items: center;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-  }
-  
-  .review-photo {
-    border-radius: 50%;
-    width: 80px;
-    height: 80px;
-    margin-right: 1rem; /* Space between photo and content */
-  }
-  
-  .review-content {
-    flex: 1;
-    text-align: left;
-  }
-  
-  .review-rating .star {
-    color: gold;
-    font-size: 1.2em;
-  }
-  
-  .review-rating {
-    margin-bottom: 0.5rem; /* Space between rating and text */
-  }
-  
-  .review-content h3 {
-    margin: 0;
-    font-family: 'Figtree', sans-serif; /* Consistent font with other headings */
-  }
-  
-  /* Ensure consistency in buttons and links within reviews */
-  .review-content p {
-    font-family: 'Alegreya Sans', sans-serif; /* Maintain font consistency with body */
-  }
-  
-  @media screen and (max-width: 768px) {
-    .reviews-grid {
       grid-template-columns: 1fr; /* Make reviews full width on small screens */
-    }
   }
-  
+}
+
+/* Write a Review Form Styles */
+#write-review-container {
+  margin: 2rem 0;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+#review-form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: 'Alegreya Sans', sans-serif;
+}
+
+#review-form .review-rating .star {
+  cursor: pointer;
+  color: lightgray;
+  font-size: 1.5em;
+}
+
+#review-form .review-rating .star.selected {
+  color: gold;
+}
+
+#review-form button {
+  padding: 0.5rem 1rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#review-form button:hover {
+  background-color: #45a049;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Updated logo styles */
+.logo a {
+  text-decoration: none; /* Removes the underline */
+  color: inherit; /* Inherits the color from the parent (h1) */
+}
+
+.logo a:link,
+.logo a:visited,
+.logo a:hover,
+.logo a:active {
+  text-decoration: none; /* Removes the underline in all states */
+  color: inherit; /* Ensures the color stays the same in all states */
+}
+
+h1.logo {
+  margin: 0; /* Remove any default margin */
+  padding: 0; /* Remove any default padding */
+  color: #000; /* Ensure the color is black or your desired color */
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: inherit; /* Inherit the color of the surrounding element */
+}
+
+a {
+  text-decoration: none;
+  color: inherit; /* Inherit the color of the surrounding element */
+}

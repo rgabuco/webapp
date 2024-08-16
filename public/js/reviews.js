@@ -1,6 +1,4 @@
-$(document).ready(function() {
-    localStorage.clear();
-    // create dummy data on document ready
+$(document).ready(function () {
+    // Initialize and create dummy data
     createDummyData();
-});
 
