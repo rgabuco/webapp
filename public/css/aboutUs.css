@@ -1,0 +1,43 @@
+form {
+    font-size: larger;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+ form {
+    border: 1px solid gray;
+    padding: 3rem;
+    border-radius: 0.5rem;
+    margin: 0 auto;
+    text-align: left;
+    min-width: 400px;
+    max-width: 768px;
+    background-color: rgb(250, 250, 250);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  select, button, input {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid gray;
+    font-size: 1rem;
+    background-color: rgb(250, 250, 250);
+    color: black;
+  }
+
+  .logo-link {
+    text-decoration: none;
+    color: black;
+  }
+
+  .logo {
+    font-family: 'Pacifico', cursive;
+    cursor: pointer;
+  }
