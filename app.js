@@ -8,6 +8,21 @@ const PORT = 3000;
 app.use(express.json());
 app.use(express.static("public"));
 
+// Path to studiData.json file
+const studioDataFilePath = path.join(__dirname, "data", "studioData.json");
+const userDataFilePath = path.join(__dirname, "data", "userData.json");
+
+// Check if studioData.json file exists. If it doesn't, then create one.
+if (!fs.existsSync(studioDataFilePath)) {
+  fs.writeFileSync(studioDataFilePath, JSON.stringify([], null, 2), "utf8");
+  console.log("Created an empty studioData.json file.");
+}
+// Check if userData.json file exists. If it doesn't, then create one.
+if (!fs.existsSync(userDataFilePath)) {
+  fs.writeFileSync(userDataFilePath, JSON.stringify([], null, 2), "utf8");
+  console.log("Created an empty userData.json file.");
+}
+
 app.get("/api/users", (req, res) => {
   const filePath = path.join(__dirname, "data", "userData.json");
   if (fs.existsSync(filePath)) {
