@@ -1,103 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Add Listing</title>
-  <link rel="stylesheet" href="../css/common.css">
-  <link rel="stylesheet" href="../css/addListing.css">
-  <script src="../lib/jquery-3.7.1.js" defer></script>
-  <script src="../js/common.js" defer></script>
-  <script src="../js/addListing.js" defer></script>    
-</head>
-<body>
-  <header>
-    <div>
-      <a href="studiosListing.html" class="logo-link">
-        <h1 class="logo">Creative Studio Rentals</h1>
-      </a>
-    </div>
-    <div id="home" class="home-btn">
-      <nav>
-        <ul>
-          <li><a href="studiosListing.html" class="nav-btn-plain-text">Studio Listing</a></li>
-          <li><a href="./account.html" class="nav-btn-plain-text">My Account</a></li>
-          <li><a href="../index.html" class="nav-btn-with-background">Home</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  <main>
-    <div id="add-listing">
-      <form>
-        <div>
-          <label for="name">Studio Name:</label>
-          <input type="text" id="name" class="name">
-        </div>
-        <div>
-          <label for="address">Address:</label>
-          <input type="text" id="address" class="address">
-        </div>
-        <div>
-          <label for="neighborhood">Neighborhood:</label>
-          <input type="text" id="neighborhood" class="neighborhood">
-        </div>
-        <div>
-          <label for="size">Size (sqm):</label>
-          <input type="number" id="size" class="size">
-        </div>
-        <div>
-          <label for="studio-type">Type:</label>
-          <select id="studio-type">
-            <option value="Photography Studio">Photography</option>
-            <option value="Art Studio">Art</option>
-            <option value="Music Studio">Music</option>
-            <option value="Dance Studio">Dance</option>
-            <option value="Recording Studio">Recording</option>
-            <option value="Film Studio">Film</option>
-          </select>
-        </div>
-        <div>
-          <label for="capacity">Capacity:</label>
-          <input type="number" id="capacity" class="capacity">
-        </div>
-        <div>
-          <label for="hasParking">Parking Available:</label>
-          <select id="hasParking">
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
-        </div>
-        <div>
-          <label for="hasPublicTransport">Public Transport Available:</label>
-          <select id="hasPublicTransport">
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
-        </div>
-        <div>
-          <label for="availability">Availability:</label>
-          <input type="text" placeholder="Available" readonly="readonly">
-        </div>
-        <div>
-          <label for="rentalTerm">Rental Term:</label>
-          <select id="rentalTerm">
-            <option value="hour">Hour</option>
-            <option value="day">Day</option>
-            <option value="month">Month</option>
-            <option value="year">Year</option>
-          </select>
-        </div>
-        <div>
-          <label for="price">Price:</label>
-          <input type="number" id="price" class="price">
-        </div>
-        <div id="error-message">
-          <!-- Error message -->
-        </div>
-        <button type="submit" id="add-listing-btn">Add Listing</button>
-      </form>
-    </div>
-  </main>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Listing</title>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/addListing.css" />
+    <script src="../lib/jquery-3.7.1.js" defer></script>
+    <script src="../js/common.js" defer></script>
+    <script src="../js/addListing.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div>
+        <a href="studiosListing.html" class="logo-link">
+          <h1 class="logo">Creative Studio Rentals</h1>
+        </a>
+      </div>
+      <div id="home" class="home-btn">
+        <nav>
+          <ul>
+            <li>
+              <a href="studiosListing.html" class="nav-btn-plain-text">Studio Listing</a>
+            </li>
+            <li>
+              <a href="./account.html" class="nav-btn-plain-text">My Account</a>
+            </li>
+            <li>
+              <a href="../index.html" class="nav-btn-with-background">Home</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div id="add-listing">
+        <form>
+          <div>
+            <label for="name">Studio Name:</label>
+            <input type="text" id="name" class="name" />
+          </div>
+          <div>
+            <label for="address">Address:</label>
+            <input type="text" id="address" class="address" />
+          </div>
+          <div>
+            <label for="neighborhood">Neighborhood:</label>
+            <input type="text" id="neighborhood" class="neighborhood" />
+          </div>
+          <div>
+            <label for="size">Size (sqm):</label>
+            <input type="number" id="size" class="size" />
+          </div>
+          <div>
+            <label for="studio-type">Type:</label>
+            <select id="studio-type">
+              <option value="Photography Studio">Photography</option>
+              <option value="Art Studio">Art</option>
+              <option value="Music Studio">Music</option>
+              <option value="Dance Studio">Dance</option>
+              <option value="Recording Studio">Recording</option>
+              <option value="Film Studio">Film</option>
+            </select>
+          </div>
+          <div>
+            <label for="capacity">Capacity:</label>
+            <input type="number" id="capacity" class="capacity" />
+          </div>
+          <div>
+            <label for="hasParking">Parking Available:</label>
+            <select id="hasParking">
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div>
+            <label for="hasPublicTransport">Public Transport Available:</label>
+            <select id="hasPublicTransport">
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div>
+            <label for="availability">Availability:</label>
+            <input type="text" placeholder="Available" readonly="readonly" />
+          </div>
+          <div>
+            <label for="rentalTerm">Rental Term:</label>
+            <select id="rentalTerm">
+              <option value="hour">Hour</option>
+              <option value="day">Day</option>
+              <option value="month">Month</option>
+              <option value="year">Year</option>
+            </select>
+          </div>
+          <div>
+            <label for="price">Price:</label>
+            <input type="number" id="price" class="price" />
+          </div>
+          <div id="error-message">
+            <!-- Error message -->
+          </div>
+          <button type="submit" id="add-listing-btn">Add Listing</button>
+        </form>
+      </div>
+    </main>
+  </body>
 </html>

@@ -1,109 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Studios Listing</title>
-  <link rel="stylesheet" href="../css/common.css">
-  <link rel="stylesheet" href="../css/studiosListing.css">
-  <script src="../lib/jquery-3.7.1.js" defer></script>
-  <script src="../js/common.js" defer></script>
-  <script src="../js/studiosListing.js" defer></script>
-</head>
-<body>
-  <header>
-    <div>
-      <a href="home.html" class="logo-link">
-        <h1 class="logo">Creative Studio Rentals</h1>
-      </a>
-    </div>
-    <div id="home" class="home-btn">
-      <nav>
-        <ul>
-          <li><a href="./account.html" class="nav-btn-plain-text">My Account</a></li>
-          <li><button id="view-my-listing-btn" class="nav-btn">View My Listings</button></li>
-          <li><button id="add-studio-btn" class="nav-btn">Add Studio</button></li>
-          <li><a href="../index.html" class="nav-btn-with-background">Logout</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  <main>
-    <h1>Studios Listing</h1>
-    <div class="filters">
-      <div class="filter-group">
-        <label for="search">Search:</label>
-        <input type="text" id="search" placeholder="Search properties">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Studios Listing</title>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/studiosListing.css" />
+    <script src="../lib/jquery-3.7.1.js" defer></script>
+    <script src="../js/common.js" defer></script>
+    <script src="../js/studiosListing.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div>
+        <a href="home.html" class="logo-link">
+          <h1 class="logo">Creative Studio Rentals</h1>
+        </a>
       </div>
-      <div class="filter-group">
-        <label for="price">Price:</label>
-        <div class="range-filter">
-          <input type="number" id="min-price" placeholder="Min">
-          <input type="number" id="max-price" placeholder="Max">
+      <div id="home" class="home-btn">
+        <nav>
+          <ul>
+            <li><a href="./account.html" class="nav-btn-plain-text">My Account</a></li>
+            <li><button id="view-my-listing-btn" class="nav-btn">View My Listings</button></li>
+            <li><button id="add-studio-btn" class="nav-btn">Add Studio</button></li>
+            <li><a href="../index.html" class="nav-btn-with-background">Logout</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <h1>Studios Listing</h1>
+      <div class="filters">
+        <div class="filter-group">
+          <label for="search">Search:</label>
+          <input type="text" id="search" placeholder="Search properties" />
+        </div>
+        <div class="filter-group">
+          <label for="price">Price:</label>
+          <div class="range-filter">
+            <input type="number" id="min-price" placeholder="Min" />
+            <input type="number" id="max-price" placeholder="Max" />
+          </div>
+        </div>
+        <div class="filter-group">
+          <label for="capacity">Capacity:</label>
+          <div class="range-filter">
+            <input type="number" id="min-capacity" placeholder="Min" />
+            <input type="number" id="max-capacity" placeholder="Max" />
+          </div>
+        </div>
+        <div class="filter-group">
+          <label for="size">Size (sqm):</label>
+          <div class="range-filter">
+            <input type="number" id="min-size" placeholder="Min" />
+            <input type="number" id="max-size" placeholder="Max" />
+          </div>
+        </div>
+        <div class="filter-group">
+          <label for="location">Neighborhood:</label>
+          <select id="location">
+            <option value="any">Any</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="availability">Availability:</label>
+          <select id="availability">
+            <option value="any">Any</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="type">Type:</label>
+          <select id="type">
+            <option value="any">Any</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="hasParking">Parking:</label>
+          <select id="hasParking">
+            <option value="any">Any</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="hasPublicTransport">Public Transport:</label>
+          <select id="hasPublicTransport">
+            <option value="any">Any</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="rentalTerm">Rental Term:</label>
+          <select id="rentalTerm">
+            <option value="any">Any</option>
+          </select>
         </div>
       </div>
-      <div class="filter-group">
-        <label for="capacity">Capacity:</label>
-        <div class="range-filter">
-          <input type="number" id="min-capacity" placeholder="Min">
-          <input type="number" id="max-capacity" placeholder="Max">
-        </div>
+      <div class="filter-button-container">
+        <button id="filterButton">Apply Filters</button>
+        <button id="clearFiltersButton">Clear Filters</button>
       </div>
-      <div class="filter-group">
-        <label for="size">Size (sqm):</label>
-        <div class="range-filter">
-          <input type="number" id="min-size" placeholder="Min">
-          <input type="number" id="max-size" placeholder="Max">
-        </div>
+      <div id="studios-container">
+        <!-- studio data will be displayed here in boxes -->
       </div>
-      <div class="filter-group">
-        <label for="location">Neighborhood:</label>
-        <select id="location">
-          <option value="any">Any</option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label for="availability">Availability:</label>
-        <select id="availability">
-          <option value="any">Any</option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label for="type">Type:</label>
-        <select id="type">
-          <option value="any">Any</option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label for="hasParking">Parking:</label>
-        <select id="hasParking">
-          <option value="any">Any</option>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label for="hasPublicTransport">Public Transport:</label>
-        <select id="hasPublicTransport">
-          <option value="any">Any</option>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label for="rentalTerm">Rental Term:</label>
-        <select id="rentalTerm">
-          <option value="any">Any</option>
-        </select>
-      </div>
-    </div>
-    <div class="filter-button-container">
-      <button id="filterButton">Apply Filters</button>
-      <button id="clearFiltersButton">Clear Filters</button>
-    </div>
-    <div id="studios-container">
-      <!-- studio data will be displayed here in boxes -->
-    </div>
-  </main>
-</body>
+    </main>
+  </body>
 </html>

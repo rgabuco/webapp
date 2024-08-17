@@ -1,53 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Account</title>
-  <link rel="stylesheet" href="../css/common.css">
-  <link rel="stylesheet" href="../css/createAccount.css">
-  <script src="../lib/jquery-3.7.1.js" defer></script>
-  <script src="../js/common.js" defer></script>
-  <script src="../js/createAccount.js" defer></script>
-</head>
-<body>
-  <header>
-    <div>
-      <h1 class="logo">Creative Studio Rentals</h1>
-    </div>
-    <div id="home" class="home-btn">
-      <nav>
-        <ul>
-          <li><a href="../index.html" class="nav-btn-with-background">Home</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  <main>
-    <div id="saveModal" class="modal">
-      <div class="modal-content">
-        <span id="saveClose" class="close">&times;</span>
-        <p>Are you sure you want to create this account?</p>
-        <div class="modal-buttons">
-          <button id="confirmSave" class="modal-btn">Create</button>
-          <button id="cancelSave" class="modal-btn">Cancel</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Account</title>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/createAccount.css" />
+    <script src="../lib/jquery-3.7.1.js" defer></script>
+    <script src="../js/common.js" defer></script>
+    <script src="../js/createAccount.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1 class="logo">Creative Studio Rentals</h1>
+      </div>
+      <div id="home" class="home-btn">
+        <nav>
+          <ul>
+            <li>
+              <a href="../index.html" class="nav-btn-with-background">Home</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div id="saveModal" class="modal">
+        <div class="modal-content">
+          <span id="saveClose" class="close">&times;</span>
+          <p>Are you sure you want to create this account?</p>
+          <div class="modal-buttons">
+            <button id="confirmSave" class="modal-btn">Create</button>
+            <button id="cancelSave" class="modal-btn">Cancel</button>
+          </div>
         </div>
       </div>
-    </div>
-     <div id="sign-up-form">
+      <div id="sign-up-form">
         <h1>Create Account</h1>
         <form>
           <div>
-          <label for="name">Full Name</label>
-          <input type="text" id="name" name="name">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" />
           </div>
           <div>
-          <label for="contact-no">Phone Number</label>
-          <input type="tel" id="contact-no" name="contact-no">
+            <label for="contact-no">Phone Number</label>
+            <input type="tel" id="contact-no" name="contact-no" />
           </div>
           <div>
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" />
           </div>
         </form>
         <div>
@@ -57,12 +59,15 @@
           <!-- Error message -->
         </div>
         <div>
-          <p id="login-link">Have an account? <a href="../html/login.html"><strong>Login</strong></a></p>
+          <p id="login-link">
+            Have an account?
+            <a href="../html/login.html"><strong>Login</strong></a>
+          </p>
         </div>
-     </div> 
-  </main>
-  <footer>
-    <p>&copy; 2024, Creative Studio Rentals</p>
-  </footer>  
-</body>
+      </div>
+    </main>
+    <footer>
+      <p>&copy; 2024, Creative Studio Rentals</p>
+    </footer>
+  </body>
 </html>

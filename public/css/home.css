@@ -37,7 +37,6 @@ main {
   margin-top: 2rem;
 }
 
-
 @media screen and (max-width: 768px) {
   .slideshow {
     height: 65vw; /* Increase height a bit for smaller screens */

@@ -1,68 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Account</title>
-  <link rel="stylesheet" href="../css/common.css">
-  <link rel="stylesheet" href="../css/account.css">
-  <script src="../lib/jquery-3.7.1.js" defer></script>
-  <script src="../js/common.js" defer></script>
-  <script src="../js/account.js" defer></script> </head>
-<body>
-  <header>
-    <div>
-      <a href="home.html" class="logo-link">
-        <h1 class="logo">Creative Studio Rentals</h1>
-      </a>
-    </div>
-    <div id="home" class="home-btn">
-      <nav>
-        <ul>
-          <li><a href="studiosListing.html" class="nav-btn-plain-text">Studio Listing</a></li>
-          <li><a href="../index.html" class="nav-btn-with-background">Logout</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  <main>
-    <div id="saveModal" class="modal">
-      <div class="modal-content">
-        <span id="saveClose" class="close">&times;</span>
-        <p>Are you sure you want to save the changes?</p>
-        <div class="modal-buttons">
-          <button id="confirmSave" class="modal-btn">Yes</button>
-          <button id="cancelSave" class="modal-btn">Cancel</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Account</title>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/account.css" />
+    <script src="../lib/jquery-3.7.1.js" defer></script>
+    <script src="../js/common.js" defer></script>
+    <script src="../js/account.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div>
+        <a href="home.html" class="logo-link">
+          <h1 class="logo">Creative Studio Rentals</h1>
+        </a>
+      </div>
+      <div id="home" class="home-btn">
+        <nav>
+          <ul>
+            <li>
+              <a href="studiosListing.html" class="nav-btn-plain-text">Studio Listing</a>
+            </li>
+            <li>
+              <a href="../index.html" class="nav-btn-with-background">Logout</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div id="saveModal" class="modal">
+        <div class="modal-content">
+          <span id="saveClose" class="close">&times;</span>
+          <p>Are you sure you want to save the changes?</p>
+          <div class="modal-buttons">
+            <button id="confirmSave" class="modal-btn">Yes</button>
+            <button id="cancelSave" class="modal-btn">Cancel</button>
+          </div>
         </div>
       </div>
-    </div>
-    <div id="main-div">
-      <div id="account-details-form">
-        <h2>Account Details</h2>
-        <form>
-          <div>
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" disabled>
-          </div>
-          <div>
-            <label for="contact-no">Phone Number</label>
-            <input type="tel" id="contact-no" name="contact-no" disabled>
-          </div>
-          <div>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" disabled>
-          </div>
-          <div>
-            <button id="edit-btn" type="button">Edit Account</button>
-            <button id="save-btn" class="save-btn" style="display: none;">Save Changes</button>
-            <button id="cancel-btn" type="button" style="display: none;">Cancel</button>
-          </div>
-          <div id="error-message">
-            <!-- Error message -->
-          </div>
-        </form>
+      <div id="main-div">
+        <div id="account-details-form">
+          <h2>Account Details</h2>
+          <form>
+            <div>
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" disabled />
+            </div>
+            <div>
+              <label for="contact-no">Phone Number</label>
+              <input type="tel" id="contact-no" name="contact-no" disabled />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" disabled />
+            </div>
+            <div>
+              <button id="edit-btn" type="button">Edit Account</button>
+              <button id="save-btn" class="save-btn" style="display: none">Save Changes</button>
+              <button id="cancel-btn" type="button" style="display: none">Cancel</button>
+            </div>
+            <div id="error-message">
+              <!-- Error message -->
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
-  </main>
-</body>
+    </main>
+  </body>
 </html>

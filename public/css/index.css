@@ -52,7 +52,7 @@ main {
   text-align: center;
   font-size: 1em;
   margin: 1rem 0; /* Adjust margin as needed */
-  font-family: 'Figtree', sans-serif; /* Consistent font with other text */
+  font-family: "Figtree", sans-serif; /* Consistent font with other text */
 }
 
 /* Customer reviews section styles */
@@ -101,12 +101,12 @@ main {
 
 .review-content h3 {
   margin: 0;
-  font-family: 'Figtree', sans-serif; /* Consistent font with other headings */
+  font-family: "Figtree", sans-serif; /* Consistent font with other headings */
 }
 
 /* Ensure consistency in buttons and links within reviews */
 .review-content p {
-  font-family: 'Alegreya Sans', sans-serif; /* Maintain font consistency with body */
+  font-family: "Alegreya Sans", sans-serif; /* Maintain font consistency with body */
 }
 
 @media screen and (max-width: 768px) {

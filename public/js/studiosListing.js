@@ -1,29 +1,29 @@
-$(document).ready(async function() {
-  const userRole = localStorage.getItem('userRole');
-  const userLoggedIn = localStorage.getItem('userLoggedIn');
+$(document).ready(async function () {
+  const userRole = localStorage.getItem("userRole");
+  const userLoggedIn = localStorage.getItem("userLoggedIn");
   let studios = [];
 
   // Define the input elements at the top
-  const nameInput = document.getElementById('search');
-  const minPriceInput = document.getElementById('min-price');
-  const maxPriceInput = document.getElementById('max-price');
-  const minCapacityInput = document.getElementById('min-capacity');
-  const maxCapacityInput = document.getElementById('max-capacity');
-  const minSizeInput = document.getElementById('min-size');
-  const maxSizeInput = document.getElementById('max-size');
-  const locationSelect = document.getElementById('location');
-  const availabilitySelect = document.getElementById('availability');
-  const typeSelect = document.getElementById('type');
-  const hasParkingSelect = document.getElementById('hasParking');
-  const hasPublicTransportSelect = document.getElementById('hasPublicTransport');
-  const rentalTermSelect = document.getElementById('rentalTerm');
+  const nameInput = document.getElementById("search");
+  const minPriceInput = document.getElementById("min-price");
+  const maxPriceInput = document.getElementById("max-price");
+  const minCapacityInput = document.getElementById("min-capacity");
+  const maxCapacityInput = document.getElementById("max-capacity");
+  const minSizeInput = document.getElementById("min-size");
+  const maxSizeInput = document.getElementById("max-size");
+  const locationSelect = document.getElementById("location");
+  const availabilitySelect = document.getElementById("availability");
+  const typeSelect = document.getElementById("type");
+  const hasParkingSelect = document.getElementById("hasParking");
+  const hasPublicTransportSelect = document.getElementById("hasPublicTransport");
+  const rentalTermSelect = document.getElementById("rentalTerm");
 
   // Fetch studio data using retrieveStudioData function from common.js
   try {
     studios = await retrieveStudioData();
     initializePage();
   } catch (error) {
-    console.error('Error retrieving studio data:', error);
+    console.error("Error retrieving studio data:", error);
   }
 
   function initializePage() {
@@ -34,24 +34,24 @@ $(document).ready(async function() {
   }
 
   function toggleButtonsBasedOnUserRole() {
-    if (userRole === 'owner') {
-      $('#view-my-listing-btn').show();
-      $('#add-studio-btn').show();
+    if (userRole === "owner") {
+      $("#view-my-listing-btn").show();
+      $("#add-studio-btn").show();
     } else {
       console.log("nav-btn will be hidden");
-      $('#view-my-listing-btn').hide();
-      $('#add-studio-btn').hide();
+      $("#view-my-listing-btn").hide();
+      $("#add-studio-btn").hide();
     }
   }
 
   function setupEventListeners() {
-    $('#view-my-listing-btn').click(toggleListingsView);
-    $('#add-studio-btn').click(() => window.location.href = 'addListing.html');
-    $('#filterButton').click(applyFilters);
-    $('#clearFiltersButton').click(clearFilters);
+    $("#view-my-listing-btn").click(toggleListingsView);
+    $("#add-studio-btn").click(() => (window.location.href = "addListing.html"));
+    $("#filterButton").click(applyFilters);
+    $("#clearFiltersButton").click(clearFilters);
 
-    nameInput.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') {
+    nameInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
         event.preventDefault();
         applyFilters();
       }
@@ -60,72 +60,72 @@ $(document).ready(async function() {
 
   function toggleListingsView() {
     const buttonText = $(this).text();
-    if (buttonText === 'View My Listings') {
-      $(this).text('View All Listings');
+    if (buttonText === "View My Listings") {
+      $(this).text("View All Listings");
       displayMyListings();
     } else {
-      $(this).text('View My Listings');
+      $(this).text("View My Listings");
       displayAllListings();
     }
   }
 
   function displayAllListings() {
-    $('#studios-container').empty();
-    studios.forEach(studio => {
-      $('#studios-container').append(createStudioBox(studio));
+    $("#studios-container").empty();
+    studios.forEach((studio) => {
+      $("#studios-container").append(createStudioBox(studio));
     });
   }
 
   function displayMyListings() {
-    $('#studios-container').empty();
-    studios.forEach(studio => {
+    $("#studios-container").empty();
+    studios.forEach((studio) => {
       if (studio.ownerEmail.toLowerCase() === userLoggedIn.toLowerCase()) {
-        $('#studios-container').append(createStudioBox(studio));
+        $("#studios-container").append(createStudioBox(studio));
       }
     });
   }
 
   function createStudioBox(studio) {
     const studioBox = $('<div class="studio-box"></div>');
-    studioBox.append($('<h3></h3>').text(studio.name));
-    studioBox.append($('<p></p>').text('Neighborhood: ' + studio.neighborhood));
-    studioBox.append($('<p></p>').text('Size: ' + studio.size + ' sqm'));
-    studioBox.append($('<p></p>').text('Type: ' + studio.type));
-    studioBox.append($('<p></p>').text('Capacity: ' + studio.capacity));
-    studioBox.append($('<p></p>').text('Availability: ' + studio.availability));
-    studioBox.append($('<p class="price"></p>').text('Price: $' + studio.pricePerTerm + ' / ' + studio.rentalTerm));
-    studioBox.css('cursor', 'pointer');
-    studioBox.click(function() {
-      localStorage.setItem('selectedStudio', JSON.stringify(studio));
-      window.location.href = 'viewListing.html';
+    studioBox.append($("<h3></h3>").text(studio.name));
+    studioBox.append($("<p></p>").text("Neighborhood: " + studio.neighborhood));
+    studioBox.append($("<p></p>").text("Size: " + studio.size + " sqm"));
+    studioBox.append($("<p></p>").text("Type: " + studio.type));
+    studioBox.append($("<p></p>").text("Capacity: " + studio.capacity));
+    studioBox.append($("<p></p>").text("Availability: " + studio.availability));
+    studioBox.append($('<p class="price"></p>').text("Price: $" + studio.pricePerTerm + " / " + studio.rentalTerm));
+    studioBox.css("cursor", "pointer");
+    studioBox.click(function () {
+      localStorage.setItem("selectedStudio", JSON.stringify(studio));
+      window.location.href = "viewListing.html";
     });
     return studioBox;
   }
 
   function populateSelectOptions() {
-    const uniqueLocations = [...new Set(studios.map(p => p.neighborhood))].sort();
-    const uniqueAvailability = [...new Set(studios.map(p => p.availability))].sort();
-    const uniqueTypes = [...new Set(studios.map(p => p.type))].sort();
-    const uniqueRentalTerms = [...new Set(studios.map(p => p.rentalTerm))].sort();
-    const uniqueHasParking = [...new Set(studios.map(p => p.hasParking ? 'Yes' : 'No'))].sort();
-    const uniqueHasPublicTransport = [...new Set(studios.map(p => p.hasPublicTransport ? 'Yes' : 'No'))].sort();
+    const uniqueLocations = [...new Set(studios.map((p) => p.neighborhood))].sort();
+    const uniqueAvailability = [...new Set(studios.map((p) => p.availability))].sort();
+    const uniqueTypes = [...new Set(studios.map((p) => p.type))].sort();
+    const uniqueRentalTerms = [...new Set(studios.map((p) => p.rentalTerm))].sort();
+    const uniqueHasParking = [...new Set(studios.map((p) => (p.hasParking ? "Yes" : "No")))].sort();
+    const uniqueHasPublicTransport = [...new Set(studios.map((p) => (p.hasPublicTransport ? "Yes" : "No")))].sort();
 
     function populateSelect(selectElement, options) {
       $(selectElement).empty();
-      options.forEach(option => {
-        const optionElement = document.createElement('option');
+      options.forEach((option) => {
+        const optionElement = document.createElement("option");
         optionElement.value = option;
         optionElement.textContent = option;
         $(selectElement).append(optionElement);
       });
     }
 
-    populateSelect(locationSelect, ['any', ...uniqueLocations]);
-    populateSelect(availabilitySelect, ['any', ...uniqueAvailability]);
-    populateSelect(typeSelect, ['any', ...uniqueTypes]);
-    populateSelect(rentalTermSelect, ['any', ...uniqueRentalTerms]);
-    populateSelect(hasParkingSelect, ['any', 'Yes', 'No']);
-    populateSelect(hasPublicTransportSelect, ['any', 'Yes', 'No']);
+    populateSelect(locationSelect, ["any", ...uniqueLocations]);
+    populateSelect(availabilitySelect, ["any", ...uniqueAvailability]);
+    populateSelect(typeSelect, ["any", ...uniqueTypes]);
+    populateSelect(rentalTermSelect, ["any", ...uniqueRentalTerms]);
+    populateSelect(hasParkingSelect, ["any", "Yes", "No"]);
+    populateSelect(hasPublicTransportSelect, ["any", "Yes", "No"]);
   }
 
   function applyFilters() {
@@ -156,55 +156,58 @@ $(document).ready(async function() {
       selectedType,
       selectedHasParking,
       selectedHasPublicTransport,
-      selectedRentalTerm
+      selectedRentalTerm,
     });
 
-    const filteredStudios = studios.filter(studio => {
+    const filteredStudios = studios.filter((studio) => {
       return (
-        (selectedName === '' || studio.name.toLowerCase().includes(selectedName)) &&
-        (studio.pricePerTerm >= selectedMinPrice && studio.pricePerTerm <= selectedMaxPrice) &&
-        (studio.capacity >= selectedMinCapacity && studio.capacity <= selectedMaxCapacity) &&
-        (studio.size >= selectedMinSize && studio.size <= selectedMaxSize) &&
-        (selectedLocation === 'any' || studio.neighborhood.toLowerCase().includes(selectedLocation)) &&
-        (selectedAvailability === 'any' || studio.availability.toLowerCase() === selectedAvailability) &&
-        (selectedType === 'any' || studio.type.toLowerCase().includes(selectedType)) &&
-        (selectedHasParking === 'any' || (studio.hasParking ? 'Yes' : 'No') === selectedHasParking) &&
-        (selectedHasPublicTransport === 'any' || (studio.hasPublicTransport ? 'Yes' : 'No') === selectedHasPublicTransport) &&
-        (selectedRentalTerm === 'any' || studio.rentalTerm.toLowerCase() === selectedRentalTerm)
+        (selectedName === "" || studio.name.toLowerCase().includes(selectedName)) &&
+        studio.pricePerTerm >= selectedMinPrice &&
+        studio.pricePerTerm <= selectedMaxPrice &&
+        studio.capacity >= selectedMinCapacity &&
+        studio.capacity <= selectedMaxCapacity &&
+        studio.size >= selectedMinSize &&
+        studio.size <= selectedMaxSize &&
+        (selectedLocation === "any" || studio.neighborhood.toLowerCase().includes(selectedLocation)) &&
+        (selectedAvailability === "any" || studio.availability.toLowerCase() === selectedAvailability) &&
+        (selectedType === "any" || studio.type.toLowerCase().includes(selectedType)) &&
+        (selectedHasParking === "any" || (studio.hasParking ? "Yes" : "No") === selectedHasParking) &&
+        (selectedHasPublicTransport === "any" || (studio.hasPublicTransport ? "Yes" : "No") === selectedHasPublicTransport) &&
+        (selectedRentalTerm === "any" || studio.rentalTerm.toLowerCase() === selectedRentalTerm)
       );
     });
 
-    $('#studios-container').empty();
-    filteredStudios.forEach(studio => {
-      $('#studios-container').append(createStudioBox(studio));
+    $("#studios-container").empty();
+    filteredStudios.forEach((studio) => {
+      $("#studios-container").append(createStudioBox(studio));
     });
   }
 
   function clearFilters() {
-    nameInput.value = '';
-    minPriceInput.value = '';
-    maxPriceInput.value = '';
-    minCapacityInput.value = '';
-    maxCapacityInput.value = '';
-    minSizeInput.value = '';
-    maxSizeInput.value = '';
-    locationSelect.value = 'any';
-    availabilitySelect.value = 'any';
-    typeSelect.value = 'any';
-    hasParkingSelect.value = 'any';
-    hasPublicTransportSelect.value = 'any';
-    rentalTermSelect.value = 'any';
+    nameInput.value = "";
+    minPriceInput.value = "";
+    maxPriceInput.value = "";
+    minCapacityInput.value = "";
+    maxCapacityInput.value = "";
+    minSizeInput.value = "";
+    maxSizeInput.value = "";
+    locationSelect.value = "any";
+    availabilitySelect.value = "any";
+    typeSelect.value = "any";
+    hasParkingSelect.value = "any";
+    hasPublicTransportSelect.value = "any";
+    rentalTermSelect.value = "any";
 
     displayAllListings(); // Show all listings after clearing the filters
   }
 
-  nameInput.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
+  nameInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
       event.preventDefault();
       applyFilters();
     }
   });
 
-  $('#filterButton').click(applyFilters);
-  $('#clearFiltersButton').click(clearFilters);
+  $("#filterButton").click(applyFilters);
+  $("#clearFiltersButton").click(clearFilters);
 });

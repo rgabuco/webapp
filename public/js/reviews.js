@@ -1,4 +1,3 @@
 $(document).ready(function () {
-    // Initialize and create dummy data
-    createDummyData();
-
+  // Placeholder for reviews data
+});

@@ -1,11 +1,11 @@
-$(document).ready(function() {
+$(document).ready(function () {
   let currentIndex = 0;
-  const slides = $('.slide');
+  const slides = $(".slide");
   const totalSlides = slides.length;
 
   function showSlide(index) {
-    slides.removeClass('active');
-    slides.eq(index).addClass('active');
+    slides.removeClass("active");
+    slides.eq(index).addClass("active");
   }
 
   function nextSlide() {
@@ -18,6 +18,4 @@ $(document).ready(function() {
 
   // Change slide every 3 seconds
   setInterval(nextSlide, 3000);
-
 });
-

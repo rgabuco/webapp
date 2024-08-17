@@ -9,7 +9,7 @@
   background-color: rgb(250, 250, 250);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   margin-top: 2rem;
-  h1{
+  h1 {
     text-align: center;
     margin-bottom: 3rem;
   }
@@ -22,7 +22,9 @@ form {
   justify-content: center;
   gap: 2rem;
 }
-select, button, input {
+select,
+button,
+input {
   width: 100%;
   padding: 0.5rem;
   border-radius: 0.5rem;
@@ -64,5 +66,4 @@ button {
     margin-right: 1rem;
     padding: 1rem;
   }
-  
 }
