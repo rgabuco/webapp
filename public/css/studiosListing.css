@@ -244,10 +244,7 @@ main h1 {
     width: 100%; /* Ensure the buttons take full width on mobile screens */
     padding: 8px; /* Adjust padding for mobile screens */
   }
-  h1.logo {
-    font-size: 1.5rem;
-  }
-  ul,
+
   .nav-btn {
     font-size: small;
   }

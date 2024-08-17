@@ -17,6 +17,10 @@ main {
   color: black;
 }
 
+h2 {
+  margin-bottom: 1rem;
+}
+
 .photo-row {
   display: flex;
   justify-content: center;
