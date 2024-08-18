@@ -2,7 +2,7 @@ $(document).ready(function () {
   // Function to validate form fields
   function validateForm() {
     let isValid = true;
-    const fields = ["#name", "#address", "#size", "#neighborhood", "#capacity", "#price"];
+    const fields = ["#name", "#address", "#size", "#capacity", "#price"];
     fields.forEach((field) => {
       const $field = $(field);
       const $error = $field.siblings(".error-message");
