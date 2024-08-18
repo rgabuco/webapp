@@ -115,11 +115,12 @@ async function createDummyData() {
 
   let studioData = await fetchStudioData();
   if (!studioData.length) {
-    studioData.push(new studio("John's Art Studio", "123 Main St", "Downtown", 150, "Art Studio", 10, "No", "Yes", "Available", "Month", 3000, "John.Doe@example.com"));
-    studioData.push(new studio("Jane's Recording Studio", "456 Main St", "Downtown", 80, "Recording Studio", 5, "Yes", "no", "Available", "Day", 200, "Jane.Doe@example.com"));
-    studioData.push(new studio("JS Dance Studio", "789 Main St", "Edgemont", 200, "Dance Studio", 20, "Yes", "Yes", "Rented", "Hour", 50, "John.Smith@example.com"));
-    studioData.push(new studio("Smith Music Studio", "321 Main St", "Glendale", 120, "Music Studio", 15, "no", "Yes", "Available", "Day", 300, "Jane.Smith@example.com"));
-    studioData.push(new studio("JJ Photography Studio", "654 Main St", "Downtown", 70, "Photography Studio", 8, "Yes", "Yes", "Rented", "Hour", 40, "John.Johnson@example.com"));
+    studioData.push(new studio("John's Art Studio", "1001 8th Avenue SW", "Downtown West End", 150, "Art Studio", 10, "No", "Yes", "Available", "Month", 3000, "John.Doe@example.com"));
+    studioData.push(new studio("Jane's Recording Studio", "2413 14 St SW", "Bankview", 80, "Recording Studio", 5, "Yes", "no", "Available", "Day", 200, "Jane.Doe@example.com"));
+    studioData.push(new studio("JS Dance Studio", "7904 43 Ave NW", "Bowness", 200, "Dance Studio", 20, "Yes", "Yes", "Rented", "Hour", 50, "John.Smith@example.com"));
+    studioData.push(new studio("Smith Music Studio", "4500 25 Ave SW", "Glendale", 120, "Music Studio", 15, "no", "Yes", "Available", "Day", 300, "Jane.Smith@example.com"));
+    studioData.push(new studio("JJ Photography Studio", "250 Hawkstone Dr NW", "Hawkwood", 70, "Photography Studio", 8, "Yes", "Yes", "Rented", "Hour", 40, "John.Johnson@example.com"));
+    studioData.push(new studio("Johnny Boy Film Studio", "250 6 Ave SW", "Downtown Commercial Core", 1000, "Film Studio", 100, "Yes", "Yes", "Available", "Year", 100000, "John.Doe@example.com"));
     await saveStudioData(studioData);
   }
 }
