@@ -53,27 +53,22 @@ input {
   font-weight: bold;
 }
 
-#edit-btn {
-  background-color: black;
-  color: #fff;
-}
-
-#edit-btn:hover {
-  cursor: pointer;
-}
-
-#save-btn {
-  background-color: black;
-  color: #fff;
-}
-
+#edit-btn,
+#save-btn,
 #cancel-btn {
   background-color: black;
   color: #fff;
 }
 
+#edit-btn:hover,
 #cancel-btn:hover {
   cursor: pointer;
+  background-color: #404142;
+}
+
+#save-btn:hover {
+  cursor: pointer;
+  color: lightgray;
 }
 
 #error-message {

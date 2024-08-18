@@ -88,7 +88,7 @@ main h1 {
 }
 
 #filterButton:hover {
-  color: lightgray;
+  background-color: #404142;
 }
 
 /* Clear Filters Button Styles */
@@ -105,7 +105,7 @@ main h1 {
 }
 
 #clearFiltersButton:hover {
-  color: lightgray;
+  background-color: #404142;
 }
 
 /* Container holding studioBox elements */

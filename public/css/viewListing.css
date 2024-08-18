@@ -136,6 +136,11 @@ form select {
 #cancel-btn:hover,
 #edit-btn:hover,
 #delete-btn:hover {
+  background-color: #404142;
+  cursor: pointer;
+}
+
+#save-btn:hover {
   color: lightgray;
   cursor: pointer;
 }
