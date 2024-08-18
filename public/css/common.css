@@ -80,6 +80,10 @@ nav ul li {
   text-underline-offset: 0.5rem;
 }
 
+.std-btn:hover {
+  color: lightgray;
+}
+
 footer {
   margin-top: 2rem;
   text-align: center;
