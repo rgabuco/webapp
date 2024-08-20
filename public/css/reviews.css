@@ -9,9 +9,7 @@ main {
   padding: 1rem;
 }
 
-.logo {
-  cursor: pointer;
-}
+
 .logo-link {
   text-decoration: none;
   color: black;
