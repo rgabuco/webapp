@@ -1,9 +1,7 @@
 $(document).ready(function () {
     localStorage.clear();
-    // Create dummy data on document ready
     createDummyData();
 
-    // Add event listener for the "SEE MORE" button
     const seeMoreButton = document.querySelector('.button button');
     if (seeMoreButton) {
         seeMoreButton.addEventListener('click', function() {
@@ -22,7 +20,6 @@ $(document).ready(function () {
         thumbnail.appendChild(thumbnailItems[0]);
     }
 
-    // Function for next button
     if (nextBtn && prevBtn && slider && sliderList && thumbnail && thumbnailItems) {
         nextBtn.onclick = function() {
             moveSlider('next');
@@ -36,7 +33,7 @@ $(document).ready(function () {
             let sliderItems = sliderList.querySelectorAll('.item');
             let thumbnailItems = document.querySelectorAll('.thumbnail .item');
             
-            if(direction === 'next'){
+            if (direction === 'next') {
                 sliderList.appendChild(sliderItems[0]);
                 thumbnail.appendChild(thumbnailItems[0]);
                 slider.classList.add('next');
@@ -47,12 +44,28 @@ $(document).ready(function () {
             }
 
             slider.addEventListener('animationend', function() {
-                if(direction === 'next'){
+                if (direction === 'next') {
                     slider.classList.remove('next');
                 } else {
                     slider.classList.remove('prev');
                 }
-            }, {once: true}); // Remove the event listener after it's triggered once
+            }, { once: true });
         }
     }
+
+    const playPauseButton = $('#playPauseButton');
+    const backgroundMusic = $('#backgroundMusic')[0];
+
+    // Debugging: Log the audio element to check if it's correctly selected
+    console.log('Background Music Element:', backgroundMusic);
+
+    playPauseButton.on('click', function () {
+        if (backgroundMusic.paused) {
+            backgroundMusic.play();
+            playPauseButton.text('Pause');
+        } else {
+            backgroundMusic.pause();
+            playPauseButton.text('Play');
+        }
+    });
 });

@@ -1,43 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
 
-a{
+a {
     text-decoration: none;
 }
 
-header a{
+header a {
     color: #000;
     margin-right: 5px;
     padding: 5px 10px;
     transition: 0.2s;
 }
 
-a.active{
+a.active {
     background: #14ff72cb;
     border-radius: 2px;
 }
 
 /* slider section  */
-.slider{
+.slider {
     height: 100vh;
     margin-top: -50px;
     margin-left: 50px;
     width: 95vw;
     overflow: hidden;
     position: relative;
+    z-index: 1; /* Ensure slider is below other elements */
 }
-.slider .list .item{
+
+.slider .list .item {
     width: 80%;
     height: 80%;
     position: absolute;
     inset: 0 0 0 0;
 }
-.slider .list .item img{
+
+.slider .list .item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     justify-content: center;
 }
-.slider .list .item .content{
+
+.slider .list .item .content {
     position: absolute;
     top: 20%;
     width: 80%;
@@ -51,22 +55,25 @@ a.active{
 }
 
 .slider .list .item .content .title,
-.slider .list .item .content .type{
+.slider .list .item .content .type {
     font-size: 4em;
     font-weight: bold;
     line-height: 1.3em;
 }
-.slider .list .item .type{
+
+.slider .list .item .type {
     color: #999;
 }
-.slider .list .item .button{
+
+.slider .list .item .button {
     display: grid;
     grid-template-columns: repeat(2, 130px);
     grid-template-rows: 40px;
     gap: 5px;
     margin-top: 20px;
 }
-.slider .list .item .button button{
+
+.slider .list .item .button button {
     border: none;
     background-color: #eee;
     font-family: Poppins;
@@ -76,54 +83,56 @@ a.active{
     letter-spacing: 2px;
 }
 
-.slider .list .item .button button:hover{
+.slider .list .item .button button:hover {
     letter-spacing: 3px;
 }
-.slider .list .item .button button:nth-child(2){
+
+.slider .list .item .button button:nth-child(2) {
     background-color: transparent;
     border: 1px solid #fff;
     color: #eee;
 }
 
 /* Thumbnail Section  */
-.thumbnail{
+.thumbnail {
     position: absolute;
     bottom: 80px;
     left: 50%;
-    width: max-content;
-    z-index: 100;
+    transform: translateX(-50%);
     display: flex;
-    gap: 10px;
+    gap: 1em;
+    z-index: 10; /* Ensure thumbnails are above the slider */
 }
 
-.thumbnail .item{
-    width: 150px;
-    height: 220px;
+.thumbnail .item {
+    width: 10vw;
+    height: 15vh;
     flex-shrink: 0;
     position: relative;
 }
 
-.thumbnail .item img{
-    width: 80%;
-    height: 80%;
+.thumbnail .item img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border-radius: 20px;
-    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+    border-radius: 1em;
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.3);
 }
 
 /* nextPrevArrows Section  */
-.nextPrevArrows{
+.nextPrevArrows {
     position: absolute;
     top: 80%;
-    right: 32%;
-    z-index: 100;
+    right: 31%;
+    z-index: 10; /* Ensure arrows are above the slider */
     width: 300px;
     max-width: 30%;
     display: flex;
     gap: 10px;
     align-items: center;
 }
-.nextPrevArrows button{
+
+.nextPrevArrows button {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -135,13 +144,14 @@ a.active{
     transition: .5s;
     cursor: pointer;
 }
-.nextPrevArrows button:hover{
+
+.nextPrevArrows button:hover {
     background-color: #fff;
-    color: #000 ;
+    color: #000;
 }
 
 /* Animation Part */
-.slider .list .item:nth-child(1){
+.slider .list .item:nth-child(1) {
     z-index: 1;
 }
 
@@ -156,28 +166,32 @@ a.active{
     animation: showContent .5s 1s linear 1 forwards;
 }
 
-@keyframes showContent{
-    to{
+@keyframes showContent {
+    to {
         transform: translateY(0px);
         filter: blur(0px);
         opacity: 1;
     }
 }
-.slider .list .item:nth-child(1) .content .title{
+
+.slider .list .item:nth-child(1) .content .title {
     animation-delay: 0.4s !important;
 }
-.slider .list .item:nth-child(1) .content .type{
+
+.slider .list .item:nth-child(1) .content .type {
     animation-delay: 0.6s !important;
 }
-.slider .list .item:nth-child(1) .content .description{
+
+.slider .list .item:nth-child(1) .content .description {
     animation-delay: 0.8s !important;
 }
-.slider .list .item:nth-child(1) .content .buttons{
+
+.slider .list .item:nth-child(1) .content .buttons {
     animation-delay: 1s !important;
 }
 
 /* Animation for next button click */
-.slider.next .list .item:nth-child(1) img{
+.slider.next .list .item:nth-child(1) img {
     width: 150px;
     height: 220px;
     position: absolute;
@@ -187,8 +201,8 @@ a.active{
     animation: showImage .5s linear 1 forwards;
 }
 
-@keyframes showImage{
-    to{
+@keyframes showImage {
+    to {
         bottom: 0;
         left: 0;
         width: 100%;
@@ -197,44 +211,46 @@ a.active{
     }
 }
 
-.slider.next .thumbnail .item:nth-last-child(1){
+.slider.next .thumbnail .item:nth-last-child(1) {
     overflow: hidden;
     animation: showThumbnail .5s linear 1 forwards;
 }
-.slider.prev .list .item img{
+
+.slider.prev .list .item img {
     z-index: 100;
 }
 
-@keyframes showThumbnail{
-    from{
+@keyframes showThumbnail {
+    from {
         width: 0;
         opacity: 0;
     }
 }
 
-.slider.next .thumbnail{
+.slider.next .thumbnail {
     animation: effectNext .5s linear 1 forwards;
 }
 
-@keyframes effectNext{
-    from{
+@keyframes effectNext {
+    from {
         transform: translateX(150px);
     }
 }
 
 /* Animation for prev button click */
-.slider.prev .list .item:nth-child(2){
+.slider.prev .list .item:nth-child(2) {
     z-index: 2;
 }
 
-.slider.prev .list .item:nth-child(2) img{
+.slider.prev .list .item:nth-child(2) img {
     animation: outFrame 0.5s linear 1 forwards;
     position: absolute;
     bottom: 0;
     left: 0;
 }
-@keyframes outFrame{
-    to{
+
+@keyframes outFrame {
+    to {
         width: 150px;
         height: 220px;
         bottom: 50px;
@@ -244,18 +260,19 @@ a.active{
 }
 
 .content {
-  background-color: rgba(0, 0, 0, 0.5); /* Black background with 50% opacity */
-  padding: 10px; /* Optional, adjust padding as needed */
-  border-radius: 2px; /* Optional, for rounded corners */
+    background-color: rgba(0, 0, 0, 0.5); /* Black background with 50% opacity */
+    padding: 10px; /* Optional, adjust padding as needed */
+    border-radius: 2px; /* Optional, for rounded corners */
 }
 
-.slider.prev .thumbnail .item:nth-child(1){
+.slider.prev .thumbnail .item:nth-child(1) {
     overflow: hidden;
     opacity: 0;
     animation: showThumbnail .5s linear 1 forwards;
 }
+
 .slider.next .nextPrevArrows button,
-.slider.prev .nextPrevArrows button{
+.slider.prev .nextPrevArrows button {
     pointer-events: none;
 }
 
@@ -266,12 +283,53 @@ a.active{
     animation: contentOut 1.5s linear 1 forwards!important;
 }
 
-@keyframes contentOut{
-    to{
+@keyframes contentOut {
+    to {
         transform: translateY(-150px);
         filter: blur(20px);
         opacity: 0;
     }
+}
+
+/* Slogan section styles */
+#slogan {
+    text-align: center;
+    font-size: 1em;
+    margin: 3rem 0;
+    font-family: "Poppins", sans-serif;
+    position: relative;
+    color: #000;
+    padding: 10px;
+    z-index: 20; /* Ensure slogan is above the slider */
+}
+
+/* Music Section Styles */
+#music {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#playPauseButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #999;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#playPauseButton:hover {
+    background-color: #555;
+}
+
+#playPauseButton:focus {
+    outline: none;
+}
+
+#playPauseButton:active {
+    background-color: #444;
 }
 
 /* Responsive Styles */
@@ -279,6 +337,7 @@ a.active{
     .slider .list .item .content {
         width: 70%;
     }
+
     .slider .list .item .content .title {
         font-size: 3.5em;
     }
@@ -289,9 +348,11 @@ a.active{
         width: 90%;
         padding-right: 15%;
     }
+
     .slider .list .item .content .title {
         font-size: 3em;
     }
+
     .slider .list .item .button {
         grid-template-columns: repeat(2, 100px);
     }
@@ -302,13 +363,16 @@ a.active{
         width: 100%;
         padding-right: 0;
     }
+
     .slider .list .item .content .title {
         font-size: 2.5em;
     }
+
     .thumbnail .item {
-        width: 100px;
-        height: 150px;
+        width: 15vw;
+        height: 20vh;
     }
+
     .nextPrevArrows {
         top: 75%;
         right: 20%;
@@ -320,16 +384,20 @@ a.active{
     .slider .list .item .content .title {
         font-size: 2em;
     }
+
     .slider .list .item .button {
         grid-template-columns: repeat(2, 80px);
     }
+
     .thumbnail {
         bottom: 60px;
     }
+
     .thumbnail .item {
-        width: 80px;
-        height: 120px;
+        width: 20vw;
+        height: 25vh;
     }
+
     .nextPrevArrows {
         top: 70%;
         right: 10%;
@@ -340,31 +408,15 @@ a.active{
     .slider .list .item .content .title {
         font-size: 1.5em;
     }
-    .slider .list .item .button {
-        grid-template-columns: 1fr;
-        grid-template-rows: 30px 30px;
-    }
-    .thumbnail {
-        bottom: 40px;
-    }
+
     .thumbnail .item {
-        width: 70px;
-        height: 100px;
+        width: 25vw;
+        height: 30vh;
     }
+
     .nextPrevArrows {
         top: 65%;
         right: 5%;
         width: 150px;
     }
-}
-
-/* Slogan section styles */
-#slogan {
-  text-align: center;
-  font-size: 1em;
-  margin: 3rem 0;
-  font-family: "Poppins", sans-serif;
-  position: relative;
-  color: #000;
-  padding: 10px;
 }
