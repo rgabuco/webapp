@@ -6,7 +6,7 @@ $(document).ready(function () {
     let email = $("#email").val();
     let contactNo = $("#contact-no").val();
 
-    // Retrieve user data from local storage
+    // Retrieve user data from server
     let users = await retrieveUserData();
 
     // Check email if already used
@@ -91,7 +91,7 @@ $(document).ready(function () {
         contactNo: contactNo,
       };
 
-      // Add the user object to the local storage
+      // Add the user object to the server file
       users.push(userAccount);
       await saveUserData(users);
 
