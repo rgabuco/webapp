@@ -9,10 +9,8 @@ main {
   padding: 1rem;
 }
 
-
-.logo-link {
-  text-decoration: none;
-  color: black;
+.logo {
+  cursor: pointer;
 }
 
 h2 {
