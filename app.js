@@ -1,3 +1,13 @@
+/* 
+SODV1201 (Intro to Full Stack Web Development)
+Instructor: Michael Dorsey
+Submitted By: Group F
+Members:
+  Rudy Gabuco Jr
+  Jensen Castro
+  Dawn Bosing
+*/
+
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
@@ -5,8 +15,8 @@ const path = require("path");
 const app = express();
 const PORT = 3000;
 
-app.use(express.json());
-app.use(express.static("public"));
+app.use(express.json()); // To parse JSON bodies
+app.use(express.static("public")); // To serve static files
 
 // Path to studiData.json file
 const studioDataFilePath = path.join(__dirname, "data", "studioData.json");
@@ -57,14 +67,7 @@ app.post("/api/studios", (req, res) => {
     fs.readFile(filePath, "utf8", (err, data) => {
       if (err) throw err;
       let studioData = JSON.parse(data);
-      studioData = studioData.filter(
-        (studio) =>
-          studio.name !== studioToDelete.name ||
-          studio.address !== studioToDelete.address ||
-          studio.neighborhood !== studioToDelete.neighborhood ||
-          studio.size !== studioToDelete.size ||
-          studio.type !== studioToDelete.type
-      );
+      studioData = studioData.filter((studio) => studio.name !== studioToDelete.name);
       fs.writeFile(filePath, JSON.stringify(studioData, null, 2), "utf8", (err) => {
         if (err) throw err;
         res.send("Studio data updated successfully");
