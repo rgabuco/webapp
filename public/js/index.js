@@ -68,4 +68,14 @@ $(document).ready(function () {
             playPauseButton.text('Play');
         }
     });
+
+    // Function to adjust the volume from the backend
+    function setVolume(volumeLevel) {
+        if (backgroundMusic) {
+            backgroundMusic.volume = volumeLevel;
+        }
+    }
+
+    // Example of setting the volume to 50% (0.5)
+    setVolume(0.2);
 });
