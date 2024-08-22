@@ -1,3 +1,13 @@
+/* 
+SODV1201 (Intro to Full Stack Web Development)
+Instructor: Michael Dorsey
+Submitted By: Group F
+Members:
+  Rudy Gabuco Jr
+  Jensen Castro
+  Dawn Bosing
+*/
+
 $(document).ready(function () {
   // Add event listener to login button
   $("#login-btn").on("click", async function (event) {

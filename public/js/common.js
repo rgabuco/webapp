@@ -1,3 +1,13 @@
+/* 
+SODV1201 (Intro to Full Stack Web Development)
+Instructor: Michael Dorsey
+Submitted By: Group F
+Members:
+  Rudy Gabuco Jr
+  Jensen Castro
+  Dawn Bosing
+*/
+
 // User account constructor
 function userAccount(name, email, contactNo) {
   this.name = name;

@@ -33,6 +33,7 @@ if (!fs.existsSync(userDataFilePath)) {
   console.log("Created an empty userData.json file.");
 }
 
+// Handle GET request for user data
 app.get("/api/users", (req, res) => {
   const filePath = path.join(__dirname, "data", "userData.json");
   if (fs.existsSync(filePath)) {
@@ -43,12 +44,14 @@ app.get("/api/users", (req, res) => {
   }
 });
 
+// Handle POST request for user data
 app.post("/api/users", (req, res) => {
   const filePath = path.join(__dirname, "data", "userData.json");
   fs.writeFileSync(filePath, JSON.stringify(req.body, null, 2), "utf8");
   res.send("User data saved successfully");
 });
 
+// Handle GET request for studio data
 app.get("/api/studios", (req, res) => {
   const filePath = path.join(__dirname, "data", "studioData.json");
   if (fs.existsSync(filePath)) {
@@ -59,6 +62,7 @@ app.get("/api/studios", (req, res) => {
   }
 });
 
+// Handle POST request for studio data
 app.post("/api/studios", (req, res) => {
   const filePath = path.join(__dirname, "data", "studioData.json");
   if (req.body.action === "delete") {

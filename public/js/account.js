@@ -1,3 +1,13 @@
+/* 
+SODV1201 (Intro to Full Stack Web Development)
+Instructor: Michael Dorsey
+Submitted By: Group F
+Members:
+  Rudy Gabuco Jr
+  Jensen Castro
+  Dawn Bosing
+*/
+
 $(document).ready(async function () {
   console.log("Document is ready");
 
@@ -100,11 +110,7 @@ $(document).ready(async function () {
     // Reset the background color
     $("#save-btn").css("background-color", "grey").prop("disabled", true);
 
-    if (
-      name.trim() !== userLoggedIn.name.trim() ||
-      email.trim() !== userLoggedIn.email.trim() ||
-      contactNo.trim() !== userLoggedIn.contactNo.trim()
-    ) {
+    if (name.trim() !== userLoggedIn.name.trim() || email.trim() !== userLoggedIn.email.trim() || contactNo.trim() !== userLoggedIn.contactNo.trim()) {
       $("#save-btn").css({ "background-color": "black", cursor: "pointer" }).prop("disabled", false);
       console.log("Save button enabled");
     } else {

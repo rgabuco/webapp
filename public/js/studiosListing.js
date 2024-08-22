@@ -1,3 +1,13 @@
+/* 
+SODV1201 (Intro to Full Stack Web Development)
+Instructor: Michael Dorsey
+Submitted By: Group F
+Members:
+  Rudy Gabuco Jr
+  Jensen Castro
+  Dawn Bosing
+*/
+
 $(document).ready(async function () {
   const userRole = localStorage.getItem("userRole");
   const userLoggedIn = localStorage.getItem("userLoggedIn");
@@ -33,6 +43,7 @@ $(document).ready(async function () {
     displayAllListings();
   }
 
+  // Function to toggle buttons based on user role
   function toggleButtonsBasedOnUserRole() {
     if (userRole === "owner") {
       $("#view-my-listing-btn").show();
@@ -44,6 +55,7 @@ $(document).ready(async function () {
     }
   }
 
+  // Function to set up event listeners
   function setupEventListeners() {
     $("#view-my-listing-btn").click(toggleListingsView);
     $("#add-studio-btn").click(() => (window.location.href = "addListing.html"));
@@ -58,6 +70,7 @@ $(document).ready(async function () {
     });
   }
 
+  // Function to toggle between viewing all listings and viewing my listings
   function toggleListingsView() {
     const buttonText = $(this).text();
     if (buttonText === "View My Listings") {
@@ -69,6 +82,7 @@ $(document).ready(async function () {
     }
   }
 
+  // Function to display all listings
   function displayAllListings() {
     $("#studios-container").empty();
     studios.forEach((studio) => {
@@ -76,6 +90,7 @@ $(document).ready(async function () {
     });
   }
 
+  // Function to display my listings
   function displayMyListings() {
     $("#studios-container").empty();
     studios.forEach((studio) => {
@@ -85,6 +100,7 @@ $(document).ready(async function () {
     });
   }
 
+  // Function to create a studio box
   function createStudioBox(studio) {
     const studioBox = $('<div class="studio-box"></div>');
     studioBox.append($("<h3></h3>").text(studio.name));
@@ -102,6 +118,7 @@ $(document).ready(async function () {
     return studioBox;
   }
 
+  // Function to populate select options
   function populateSelectOptions() {
     const uniqueLocations = [...new Set(studios.map((p) => p.neighborhood))].sort();
     const uniqueAvailability = [...new Set(studios.map((p) => p.availability))].sort();
@@ -128,6 +145,7 @@ $(document).ready(async function () {
     populateSelect(hasPublicTransportSelect, ["any", "Yes", "No"]);
   }
 
+  // Function to apply filters
   function applyFilters() {
     const selectedName = nameInput.value.toLowerCase();
     const selectedMinPrice = parseFloat(minPriceInput.value) || 0;
@@ -183,6 +201,7 @@ $(document).ready(async function () {
     });
   }
 
+  // Function to clear filters
   function clearFilters() {
     nameInput.value = "";
     minPriceInput.value = "";

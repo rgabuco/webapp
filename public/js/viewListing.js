@@ -1,9 +1,20 @@
+/* 
+SODV1201 (Intro to Full Stack Web Development)
+Instructor: Michael Dorsey
+Submitted By: Group F
+Members:
+  Rudy Gabuco Jr
+  Jensen Castro
+  Dawn Bosing
+*/
+
 $(document).ready(async function () {
   const userEmail = localStorage.getItem("userLoggedIn");
   const userRole = localStorage.getItem("userRole");
 
   let userData, studioData;
 
+  // Retrieve user data
   try {
     userData = await retrieveUserData();
   } catch (error) {
@@ -11,7 +22,7 @@ $(document).ready(async function () {
     alert("An error occurred while retrieving user data. Please try again later.");
     return;
   }
-
+  // Retrieve studio data
   try {
     studioData = await retrieveStudioData();
   } catch (error) {
@@ -46,6 +57,7 @@ $(document).ready(async function () {
     return;
   }
 
+  // Function to display studio details
   function displayStudioDetails(studio) {
     return `
       <h1>${studio.name}</h1>
@@ -62,6 +74,7 @@ $(document).ready(async function () {
     `;
   }
 
+  // Function to display contact details
   function displayContactDetails(user) {
     return `
       <h2>Contact Information</h2>
@@ -71,6 +84,7 @@ $(document).ready(async function () {
     `;
   }
 
+  // Append studio details to the DOM
   function appendStudioDetails() {
     $studioDetails.html(displayStudioDetails(selectedStudio));
 
@@ -114,6 +128,7 @@ $(document).ready(async function () {
   const userOfSelectedStudio = userData.find((user) => user.email.toLowerCase() === selectedStudio.ownerEmail.toLowerCase());
   $contactDetails.html(displayContactDetails(userOfSelectedStudio));
 
+  // Contact form submission event handler
   $("#contact-form").on("submit", function (e) {
     e.preventDefault();
     const name = $("#contact-name").val();
@@ -306,6 +321,7 @@ $(document).ready(async function () {
       });
       console.log(studioData);
 
+      // Save the updated studio data
       try {
         await saveStudioData(studioData);
         $(".modal-content p").text("Studio deleted successfully.");
@@ -392,6 +408,7 @@ $(document).ready(async function () {
       }
       console.log("Updated studioData:", studioData);
 
+      // Save the updated studio data
       try {
         await saveStudioData(studioData);
         $(".modal-content p").text("Save successful.");
